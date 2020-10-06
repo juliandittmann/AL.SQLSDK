@@ -1,0 +1,31 @@
+{
+  "id": "f57e9f77-083c-477e-8d75-442c3cf41942",
+  "name": "Sql API",
+  "publisher": "Julian Dittmann",
+  "version": "17.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+  ],
+  "application": "17.0.0.0",
+  "screenshots": [],
+  "platform": "17.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50149
+    }
+  ],
+  "showMyCode": true,
+  "runtime": "6.0",
+  "target": "OnPrem",
+  "features": [
+    "TranslationFile",
+    "NoImplicitWith"
+  ]
+}

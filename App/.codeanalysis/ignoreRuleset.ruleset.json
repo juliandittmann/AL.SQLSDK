@@ -1,0 +1,27 @@
+{
+    "name": "App Ruleset",
+    "description": "The code analysis rules",
+    "rules": [
+        {
+            "id": "AA0214",
+            "action": "Hidden",
+            "justification": "Records arent Edited."
+        },
+        {
+            "id": "AA0231",
+            "action": "Hidden",
+            "justification": "Errors are clearly visible to the developer."
+        },
+
+        {
+            "id": "AA0072",
+            "action": "Hidden",
+            "justification": "Rule might be not finished yet."
+        },
+        {
+            "id": "AA0218",
+            "action": "Hidden",
+            "justification": "Tooltips arent nessessary yet." 
+        }  
+    ] 
+}

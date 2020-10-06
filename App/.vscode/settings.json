@@ -1,0 +1,26 @@
+{
+    "al.assemblyProbingPaths": [
+        "src/DotNet"
+    ],
+    "[al]": {
+        "editor.defaultFormatter": "ms-dynamics-smb.al"
+    },
+    "al.enableCodeActions": true,
+    "al.enableCodeAnalysis": true,
+    "al.codeAnalyzers": [
+        "${CodeCop}",
+        "${UICop}"
+    ],
+    "al.compilationOptions": {
+        "parallel": true,
+        "maxDegreeOfParallelism": 8
+    },
+    "al.ruleSetPath": ".codeanalysis/ignoreRuleset.ruleset.json",
+
+    "CRS.OnSaveAlFileAction": "Rename",
+    "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.ObjectNamePrefix": "jdi Sql ",
+    "CRS.RemovePrefixFromFilename": true
+}
