@@ -1,0 +1,1 @@
+CREATE VIEW [sampleview] AS SELECT a.No_ , a.Name, a.Address FROM [CRONUS DE$Customer] as a;

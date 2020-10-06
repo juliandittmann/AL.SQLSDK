@@ -1,0 +1,1 @@
+select dbo.Test1()
