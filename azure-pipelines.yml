@@ -1,5 +1,9 @@
 name: $(Build.BuildId)
 
+pool:
+  vmImage: 'windows-latest'
+  demands: Docker
+
 variables:
 - name: 'AppVersion'
   value: '17.0.[yyyyWW].*'
