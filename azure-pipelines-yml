@@ -1,0 +1,36 @@
+name: $(Build.BuildId)
+
+variables:
+- name: 'AppVersion'
+  value: '17.0.[yyyyWW].*'
+- name: 'dockerimage'
+  value: 'mcr.microsoft.com/businesscentral/sandbox'
+
+steps:
+- checkout: self
+  clean: true
+  
+- task: ALOpsDockerStart@1
+  inputs:
+    docker_image: $(dockerimage)
+    docker_pull: true
+
+- task: ALOpsDockerWait@1
+  inputs:
+    search_string: 'Ready for connections!'
+
+- task: ALOpsAppCompiler@1
+  inputs:
+    usedocker: true
+    nav_app_version: $(AppVersion)
+    failed_on_warnings: true    
+
+- task: ALOpsAppPublish@1
+  inputs:
+    usedocker: true
+    nav_artifact_app_filter: '*.app'   
+    skip_verification: true 
+
+- task: ALOpsDockerRemove@1
+  enabled: true
+  condition: always()    
