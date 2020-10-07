@@ -1,8 +1,8 @@
-#SqlAPI
+# SqlAPI
 
 Kontrolle über SQL Server aus Dynamcis 365 Business Central übernehmen.
 
-##Featurelist
+## Featurelist
 
 +  Sql-Server-Verbindungen Verwaltung
     - Unterstützt ConnectionStrings
