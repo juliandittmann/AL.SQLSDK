@@ -2,36 +2,39 @@ name: $(Build.BuildId)
 
 pool:
   vmImage: 'windows-latest'
-
-variables:
-- name: 'AppVersion'
-  value: '17.0.[yyyyWW].*'
-- name: 'dockerimage'
-  value: 'mcr.microsoft.com/businesscentral/sandbox'
+  demands: docker
 
 steps:
 - checkout: self
   clean: true
   
-- task: ALOpsDockerStart@1
+- task: ALOpsDockerCreate@1
+  displayName: 'ALOPS - Create Docker Image' # It will reuse the image if already exists, or build one if it doesn't.
   inputs:
-    docker_image: $(dockerimage)
-    docker_pull: true
+    versionselect: Latest
+    artifacttype: Sandbox
+    
+- task: ALOpsDockerStart@1
+  displayName: 'ALOPS - Start Docker Container' # No need to provide any details - it will get the details from previous step
 
 - task: ALOpsDockerWait@1
+  displayName: 'ALOPS - Wait for Docker Container to start'
   inputs:
     search_string: 'Ready for connections!'
 
 - task: ALOpsAppCompiler@1
+  displayName: 'ALOPS - Compile Extension'
   inputs:
     usedocker: true
-    nav_app_version: $(AppVersion)
+    nav_app_version: '17.0.[yyyyWW].*'
     failed_on_warnings: true    
-
+    targetproject: 'App/app.json'   # point to the folder in your repo that you want to compile in this step
+  
 - task: ALOpsAppPublish@1
+  displayName: 'Publish AL-App'
   inputs:
     usedocker: true
-    nav_artifact_app_filter: '*.app'   
+    nav_artifact_app_filter: '*.app'
     skip_verification: true 
 
 - task: ALOpsDockerRemove@1
