@@ -2,8 +2,7 @@ name: $(Build.BuildId)
 
 pool:
   vmImage: 'windows-latest'
-  demands: docker
-
+  
 steps:
 - checkout: self
   clean: true
