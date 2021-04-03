@@ -1,4 +1,4 @@
-[![CI](https://github.com/juliandittmann/AL.SqlAPI/actions/workflows/ci.yml/badge.svg)](https://github.com/juliandittmann/AL.SqlAPI/actions/workflows/ci.yml)
+[![Current](https://github.com/juliandittmann/AL.SqlAPI/actions/workflows/current.yml/badge.svg)](https://github.com/juliandittmann/AL.SqlAPI/actions/workflows/current.yml)
 
 # SqlAPI
 
