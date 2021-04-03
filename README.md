@@ -1,3 +1,5 @@
+[![CI](https://github.com/juliandittmann/AL.SqlAPI/actions/workflows/ci.yml/badge.svg)](https://github.com/juliandittmann/AL.SqlAPI/actions/workflows/ci.yml)
+
 # SqlAPI
 
 Kontrolle über SQL Server aus Dynamcis 365 Business Central übernehmen.
