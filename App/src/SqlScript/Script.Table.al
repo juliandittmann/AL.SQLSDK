@@ -123,15 +123,15 @@ table 50102 "jdi Sql Script"
         FileManagement: Codeunit "File Management";
     begin
         if IncomingFileName <> '' then begin
-            Validate("File Extension", FileManagement.GetExtension(IncomingFileName));
-            Validate("File Name", CopyStr(FileManagement.GetFileNameWithoutExtension(IncomingFileName), 1, MaxStrLen("File Name")));
+            Rec.Validate("File Extension", FileManagement.GetExtension(IncomingFileName));
+            Rec.Validate("File Name", CopyStr(FileManagement.GetFileNameWithoutExtension(IncomingFileName), 1, MaxStrLen(Rec."File Name")));
         end;
 
-        if not File.HasValue() then
+        if not Rec.File.HasValue() then
             Error(NoDocumentAttachedErr);
 
-        Validate("Last Change Date", CurrentDateTime());
-        "Changed by" := UserSecurityId();
+        Rec.Validate("Last Change Date", CurrentDateTime());
+        Rec."Changed by" := UserSecurityId();
 
         CreateSqlParamenter();
     end;
@@ -169,12 +169,12 @@ table 50102 "jdi Sql Script"
         FullFileName: Text;
     begin
         // Ensure document has value in DB
-        if not File.HasValue() then
+        if not Rec.File.HasValue() then
             exit;
 
-        FullFileName := "File Name" + '.' + "File Extension";
+        FullFileName := Rec."File Name" + '.' + Rec."File Extension";
         TempBlob.CreateOutStream(DocumentStream);
-        File.ExportStream(DocumentStream);
+        Rec.File.ExportStream(DocumentStream);
         exit(FileManagement.BLOBExport(TempBlob, FullFileName, ShowFileDialog));
     end;
 
@@ -183,7 +183,7 @@ table 50102 "jdi Sql Script"
     var
         FileManagement: Codeunit "File Management";
         DocStream: InStream;
-        Sha256Hash: Text[95];
+        Sha256Hash: Text[64];
     begin
         if FileName = '' then
             Error(EmptyFileNameErr);
@@ -193,21 +193,19 @@ table 50102 "jdi Sql Script"
 
         IncomingFileName := FileName;
 
-        Validate("File Extension", FileManagement.GetExtension(IncomingFileName));
-        Validate("File Name", CopyStr(FileManagement.GetFileNameWithoutExtension(IncomingFileName), 1, MaxStrLen("File Name")));
-
+        Rec.Validate("File Extension", FileManagement.GetExtension(IncomingFileName));
+        Rec.Validate("File Name", CopyStr(FileManagement.GetFileNameWithoutExtension(IncomingFileName), 1, MaxStrLen(Rec."File Name")));
 
         Sha256Hash := CreateSha256Hash(TempBlob);
-
-        if "Hash Code (SHA256)" <> Sha256Hash then begin
+        if Rec."Hash Code (SHA256)" <> Sha256Hash then begin
             TempBlob.CreateInStream(DocStream);
-            File.ImportStream(DocStream, '', '');
-            Validate("Hash Code (SHA256)", Sha256Hash);
+            Rec.File.ImportStream(DocStream, '', '');
+            Rec.Validate("Hash Code (SHA256)", Sha256Hash);
         end;
 
-        if not File.HasValue() then
+        if not Rec.File.HasValue() then
             Error(NoDocumentAttachedErr);
-        Insert(true);
+        Rec.Insert(true);
     end;
 
     [TryFunction]
@@ -223,11 +221,11 @@ table 50102 "jdi Sql Script"
         Clear(SqlScript);
 
         // Ensure document has value in DB
-        if not File.HasValue() then
+        if not Rec.File.HasValue() then
             exit;
 
         TempBlob.CreateOutStream(DocumentOutStream, TextEncoding::UTF8);
-        File.ExportStream(DocumentOutStream);
+        Rec.File.ExportStream(DocumentOutStream);
         TempBlob.CreateInStream(DocumentInStream, TextEncoding::UTF8);
 
         StreamReader := StreamReader.StreamReader(DocumentInStream, Encoding.UTF8, true);
@@ -294,14 +292,14 @@ table 50102 "jdi Sql Script"
 
         Sha256Hash := CreateSha256Hash(TempBlob);
 
-        if "Hash Code (SHA256)" <> Sha256Hash then begin
+        if Rec."Hash Code (SHA256)" <> Sha256Hash then begin
             TempBlob.CreateInStream(DocInStream, TextEncoding::UTF8);
-            File.ImportStream(DocInStream, '', '');
+            Rec.File.ImportStream(DocInStream, '', '');
 
-            Validate("Hash Code (SHA256)", Sha256Hash);
-            Validate("Last Change Date", CurrentDateTime());
-            "Changed by" := UserSecurityId();
-            Modify(true);
+            Rec.Validate("Hash Code (SHA256)", Sha256Hash);
+            Rec.Validate("Last Change Date", CurrentDateTime());
+            Rec."Changed by" := UserSecurityId();
+            Rec.Modify(true);
         end;
     end;
 
