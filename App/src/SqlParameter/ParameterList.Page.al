@@ -1,4 +1,4 @@
-page 50106 "jdi Sql Paramenter List"
+page 50106 "jdi Sql Parameter List"
 {
     PageType = List;
     UsageCategory = None;
@@ -13,8 +13,8 @@ page 50106 "jdi Sql Paramenter List"
                 field(Name; Rec."Name")
                 {
                     ApplicationArea = All;
-                    Caption = 'Paramenter';
-                    ToolTip = 'Paramenter Name';
+                    Caption = 'Parameter';
+                    ToolTip = 'Parameter Name';
                 }
                 field(Value; Rec."Value")
                 {
