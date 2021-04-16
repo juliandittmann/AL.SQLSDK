@@ -162,7 +162,7 @@ page 50104 "jdi Sql Script List"
                     trigger OnAction()
                     var
                         SqlParamenter: Record "jdi Sql Parameter";
-                        SqlParamenterList: Page "jdi Sql Paramenter List";
+                        SqlParamenterList: Page "jdi Sql Parameter List";
                     begin
                         SqlParamenter.SetRange("Sql Script No.", Rec."No.");
                         if SqlParamenter.FindSet() then;
