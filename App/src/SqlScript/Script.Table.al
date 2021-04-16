@@ -333,29 +333,23 @@ table 50102 "jdi Sql Script"
         exit(not SqlParameter.IsEmpty());
     end;
 
-    procedure SqlParameterExist(var SqlParameter: Record "jdi Sql Parameter"): Boolean;
+    procedure GetSqlParameter() SqlParameter: Record "jdi Sql Parameter"
     begin
         SqlParameter.SetRange("Sql Script No.", Rec."No.");
-        exit(not SqlParameter.IsEmpty());
     end;
-
 
     local procedure CreateAndExecuteSqlScriptMapping(SqlConnection: Record "jdi Sql Connection")
-    var
-        SqlScriptMapping: Record "jdi Sql Script Mapping";
     begin
-        CreateSqlScriptMapping(SqlConnection, SqlScriptMapping);
-        SqlScriptMapping.Execute();
+        CreateSqlScriptMapping(SqlConnection).Execute();
     end;
 
-    local procedure CreateSqlScriptMapping(SqlConnection: Record "jdi Sql Connection"; var SqlScriptMapping: Record "jdi Sql Script Mapping")
+    local procedure CreateSqlScriptMapping(SqlConnection: Record "jdi Sql Connection") SqlScriptMapping: Record "jdi Sql Script Mapping"
     begin
         SqlScriptMapping.Init();
         SqlScriptMapping."Sql Connection No." := SqlConnection."No.";
         SqlScriptMapping."Sql Script No." := Rec."No.";
         SqlScriptMapping.Insert(true);
     end;
-
 
     var
         IncomingFileName: Text;
