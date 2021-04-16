@@ -1,5 +1,6 @@
 codeunit 50101 "jdi Sql Update"
 {
+    Access = Internal;
     Subtype = Upgrade;
 
     trigger OnCheckPreconditionsPerCompany()
