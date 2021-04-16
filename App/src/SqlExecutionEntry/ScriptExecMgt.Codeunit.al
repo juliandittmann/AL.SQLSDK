@@ -1,5 +1,6 @@
 codeunit 50104 "jdi Sql Script Exec Mgt"
 {
+    Access = Internal;
 
     [EventSubscriber(ObjectType::Table, Database::"jdi Sql Script Mapping", 'OnAfterSqlScriptExecution', '', false, false)]
     local procedure LogScriptExecution(SqlScriptMapping: Record "jdi Sql Script Mapping"; SqlScript: Record "jdi Sql Script"; var SqlParamenter: Record "jdi Sql Parameter")

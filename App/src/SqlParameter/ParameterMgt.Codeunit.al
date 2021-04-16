@@ -1,6 +1,6 @@
 codeunit 50103 "jdi Sql Parameter Mgt"
 {
-
+    Access = Internal;
     procedure CreateSqlParamenter(SQLScript: Record "jdi Sql Script")
     var
         ParamenterList: List of [Text];
