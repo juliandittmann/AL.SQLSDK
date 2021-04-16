@@ -5,7 +5,7 @@ permissionset 50100 "SQL API"
     Caption = 'Sql API';
     Permissions = codeunit "jdi Sql Install" = X,
                   codeunit "jdi Sql Management" = X,
-                  codeunit "jdi Sql Paramenter Mgt" = X,
+                  codeunit "jdi Sql Parameter Mgt" = X,
                   codeunit "jdi Sql Script Archive Mgt" = X,
                   codeunit "jdi Sql Script Exec Mgt" = X,
                   codeunit "jdi Sql Update" = X,

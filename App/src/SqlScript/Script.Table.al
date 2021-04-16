@@ -314,7 +314,7 @@ table 50102 "jdi Sql Script"
 
     procedure CreateSqlParamenter()
     var
-        SqlParameterMgt: Codeunit "jdi Sql Paramenter Mgt";
+        SqlParameterMgt: Codeunit "jdi Sql Parameter Mgt";
     begin
         SqlParameterMgt.CreateSqlParamenter(Rec);
     end;

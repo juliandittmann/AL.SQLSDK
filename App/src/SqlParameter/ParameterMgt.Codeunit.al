@@ -1,25 +1,24 @@
-codeunit 50103 "jdi Sql Paramenter Mgt"
+codeunit 50103 "jdi Sql Parameter Mgt"
 {
 
-    procedure CreateSqlParamenter(Script: Record "jdi Sql Script")
+    procedure CreateSqlParamenter(SQLScript: Record "jdi Sql Script")
     var
         ParamenterList: List of [Text];
         Parameter: Text;
     begin
-        FindSqlParamenter(Script, ParamenterList);
-
+        ParamenterList := FindSqlParamenter(SQLScript);
         foreach Parameter in ParamenterList do
-            CreateSqlParamenter(Script, Parameter);
+            InsertSqlParamenter(SQLScript, Parameter);
     end;
 
-    local procedure FindSqlParamenter(Script: Record "jdi Sql Script"; var ParameterList: List of [Text])
+    local procedure FindSqlParamenter(SQLScript: Record "jdi Sql Script") ParameterList: List of [Text];
     var
         Matches: Record Matches;
         Regex: Codeunit Regex;
         ScriptText: Text;
         SqlParemeterRegExLbl: Label '\@([^=<>\s\''''|,|;]+)', Locked = true;
     begin
-        if Script.GetScript(ScriptText) then begin
+        if SQLScript.GetScript(ScriptText) then begin
             Regex.Match(ScriptText, SqlParemeterRegExLbl, Matches);
             if Matches.FindSet() then
                 repeat
@@ -28,12 +27,12 @@ codeunit 50103 "jdi Sql Paramenter Mgt"
         end;
     end;
 
-    local procedure CreateSqlParamenter(Script: Record "jdi Sql Script"; ParamenterName: Text) //TODO: missleading function name
+    local procedure InsertSqlParamenter(SQLScript: Record "jdi Sql Script"; ParamenterName: Text)
     var
         SqlParamenter: Record "jdi Sql Parameter";
     begin
         SqlParamenter.Init();
-        SqlParamenter."Sql Script No." := Script."No.";
+        SqlParamenter."Sql Script No." := SQLScript."No.";
         SqlParamenter.Name := CopyStr(ParamenterName, 1, 250);
         if not SqlParamenter.Insert(true) then
             SqlParamenter.Modify(true);
