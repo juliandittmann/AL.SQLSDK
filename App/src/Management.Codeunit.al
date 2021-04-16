@@ -4,7 +4,7 @@ codeunit 50102 "jdi Sql Management"
 
     var
         GlobalSqlConnection: Record "jdi Sql Connection";
-        TempGlobalSqlParamenter: Record "jdi Sql Parameter" temporary;
+        TempGlobalSqlParameter: Record "jdi Sql Parameter" temporary;
 
     trigger OnRun()
     begin
@@ -19,7 +19,7 @@ codeunit 50102 "jdi Sql Management"
 
     procedure SetSqlParameter(var pSqlParameter: Record "jdi Sql Parameter" temporary)
     begin
-        TempGlobalSqlParamenter := pSqlParameter;
+        TempGlobalSqlParameter := pSqlParameter;
     end;
 
     [TryFunction]
@@ -65,12 +65,12 @@ codeunit 50102 "jdi Sql Management"
 
     procedure ExecuteNonQuery(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text)
     var
-        TempSqlParamenter: Record "jdi Sql Parameter" temporary;
+        TempSqlParameter: Record "jdi Sql Parameter" temporary;
     begin
-        ExecuteNonQuery(pSqlConnection, SqlStatement, TempSqlParamenter);
+        ExecuteNonQuery(pSqlConnection, SqlStatement, TempSqlParameter);
     end;
 
-    procedure ExecuteNonQuery(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary)
+    procedure ExecuteNonQuery(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var "; SqlStatement: Text; var SqlParameter: Record ": Record "jdi Sql Parameter" temporary)
     var
         SqlConnection: DotNet SqlConnection;
         SqlCommand: DotNet SqlCommand;
@@ -85,7 +85,7 @@ codeunit 50102 "jdi Sql Management"
         SqlCommand.CommandType := SqlCommand.CommandType.Text;
         SqlCommand.CommandTimeout := 0;
 
-        AddParamenter(SqlParamenter, SqlCommand);
+        AddParameter("; SqlStatement: Text; var SqlParameter: Record ", SqlCommand);
 
         SqlCommand.ExecuteNonQuery();
         SqlConnection.Close();
@@ -231,10 +231,10 @@ codeunit 50102 "jdi Sql Management"
     //Text - SQLConnection
     procedure ExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var ResponseText: Text)
     var
-        TempSqlParamenter: Record "jdi Sql Parameter" temporary;
+        TempSqlParameter: Record "jdi Sql Parameter" temporary;
         ResponseVariant: Variant;
     begin
-        ExecuteScalar(pSqlConnection, SqlStatement, TempSqlParamenter, ResponseVariant);
+        ExecuteScalar(pSqlConnection, SqlStatement, TempSqlParameter, ResponseVariant);
         if ResponseVariant.IsText() then
             ResponseText := ResponseVariant
         else
@@ -246,10 +246,10 @@ codeunit 50102 "jdi Sql Management"
     //Decimal - SQLConnection
     procedure ExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var ResponseDecimal: Decimal)
     var
-        TempSqlParamenter: Record "jdi Sql Parameter" temporary;
+        TempSqlParameter: Record "jdi Sql Parameter" temporary;
         ResponseVariant: Variant;
     begin
-        ExecuteScalar(pSqlConnection, SqlStatement, TempSqlParamenter, ResponseVariant);
+        ExecuteScalar(pSqlConnection, SqlStatement, TempSqlParameter, ResponseVariant);
         if ResponseVariant.IsDecimal then
             ResponseDecimal := ResponseVariant
         else
@@ -260,9 +260,9 @@ codeunit 50102 "jdi Sql Management"
     //Variant - SQLConnection
     procedure ExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var ResponseVariant: Variant)
     var
-        TempSqlParamenter: Record "jdi Sql Parameter" temporary;
+        TempSqlParameter: Record "jdi Sql Parameter" temporary;
     begin
-        ExecuteScalar(pSqlConnection, SqlStatement, TempSqlParamenter, ResponseVariant);
+        ExecuteScalar(pSqlConnection, SqlStatement, TempSqlParameter, ResponseVariant);
     end;
 
 
@@ -273,27 +273,27 @@ codeunit 50102 "jdi Sql Management"
     [TryFunction]
     procedure TryExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var ResponseText: Text)
     var
-        TempSqlParamenter: Record "jdi Sql Parameter" temporary;
+        TempSqlParameter: Record "jdi Sql Parameter" temporary;
     begin
-        ExecuteScalar(pSqlConnection, SqlStatement, TempSqlParamenter, ResponseText);
+        ExecuteScalar(pSqlConnection, SqlStatement, TempSqlParameter, ResponseText);
     end;
 
     //Try - Decimal - SQLConnection
     [TryFunction]
     procedure TryExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var ResponseDecimal: Decimal)
     var
-        TempSqlParamenter: Record "jdi Sql Parameter" temporary;
+        TempSqlParameter: Record "jdi Sql Parameter" temporary;
     begin
-        ExecuteScalar(pSqlConnection, SqlStatement, TempSqlParamenter, ResponseDecimal);
+        ExecuteScalar(pSqlConnection, SqlStatement, TempSqlParameter, ResponseDecimal);
     end;
 
     //Try - Variant - SQLConnection
     [TryFunction]
     procedure TryExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var ResponseVariant: Variant)
     var
-        TempSqlParamenter: Record "jdi Sql Parameter" temporary;
+        TempSqlParameter: Record "jdi Sql Parameter" temporary;
     begin
-        ExecuteScalar(pSqlConnection, SqlStatement, TempSqlParamenter, ResponseVariant);
+        ExecuteScalar(pSqlConnection, SqlStatement, TempSqlParameter, ResponseVariant);
     end;
 
 
@@ -305,12 +305,12 @@ codeunit 50102 "jdi Sql Management"
 
 
 
-    //Text - SQLConnection - SQLParamenter
-    procedure ExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary; var ResponseText: Text)
+    //Text - SQLConnection - SQLParameter
+    procedure ExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary; var ResponseText: Text)
     var
         ResponseVariant: Variant;
     begin
-        ExecuteScalar(pSqlConnection, SqlStatement, SqlParamenter, ResponseVariant);
+        ExecuteScalar(pSqlConnection, SqlStatement, SqlParameter, ResponseVariant);
         if ResponseVariant.IsText() then
             ResponseText := ResponseVariant
         else
@@ -318,20 +318,20 @@ codeunit 50102 "jdi Sql Management"
     end;
 
 
-    //Decimal - SQLConnection - SQLParamenter
-    procedure ExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary; var ResponseDecimal: Decimal)
+    //Decimal - SQLConnection - SQLParameter
+    procedure ExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary; var ResponseDecimal: Decimal)
     var
         ResponseVariant: Variant;
     begin
-        ExecuteScalar(pSqlConnection, SqlStatement, SqlParamenter, ResponseVariant);
+        ExecuteScalar(pSqlConnection, SqlStatement, SqlParameter, ResponseVariant);
         if ResponseVariant.IsDecimal() then
             ResponseDecimal := ResponseVariant
         else
             Evaluate(ResponseDecimal, ResponseVariant);
     end;
 
-    //Variant - SQLConnection - SQLParamenter
-    procedure ExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary; var ResponseVariant: Variant)
+    //Variant - SQLConnection - SQLParameter
+    procedure ExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary; var ResponseVariant: Variant)
     var
         SqlConnection: DotNet SqlConnection;
         SqlCommand: DotNet SqlCommand;
@@ -346,7 +346,7 @@ codeunit 50102 "jdi Sql Management"
         SqlCommand.CommandType := SqlCommand.CommandType.Text;
         SqlCommand.CommandTimeout := 0;
 
-        AddParamenter(SqlParamenter, SqlCommand);
+        AddParameter(SqlParameter, SqlCommand);
 
         ResponseVariant := SqlCommand.ExecuteScalar();
         SqlConnection.Close();
@@ -357,25 +357,25 @@ codeunit 50102 "jdi Sql Management"
 
 
 
-    //Try - Text - SQLConnection - SQLParamenter
+    //Try - Text - SQLConnection - SQLParameter
     [TryFunction]
-    procedure TryExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary; var ResponseText: Text)
+    procedure TryExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary; var ResponseText: Text)
     begin
-        ExecuteScalar(pSqlConnection, SqlStatement, SqlParamenter, ResponseText);
+        ExecuteScalar(pSqlConnection, SqlStatement, SqlParameter, ResponseText);
     end;
 
-    //Try - Decimal - SQLConnection - SQLParamenter
+    //Try - Decimal - SQLConnection - SQLParameter
     [TryFunction]
-    procedure TryExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary; var ResponseDecimal: Decimal)
+    procedure TryExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary; var ResponseDecimal: Decimal)
     begin
-        ExecuteScalar(pSqlConnection, SqlStatement, SqlParamenter, ResponseDecimal);
+        ExecuteScalar(pSqlConnection, SqlStatement, SqlParameter, ResponseDecimal);
     end;
 
-    //Try - Variant - SQLConnection - SQLParamenter
+    //Try - Variant - SQLConnection - SQLParameter
     [TryFunction]
-    procedure TryExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary; var ResponseVariant: Variant)
+    procedure TryExecuteScalar(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary; var ResponseVariant: Variant)
     begin
-        ExecuteScalar(pSqlConnection, SqlStatement, SqlParamenter, ResponseVariant);
+        ExecuteScalar(pSqlConnection, SqlStatement, SqlParameter, ResponseVariant);
     end;
 
 
@@ -383,11 +383,11 @@ codeunit 50102 "jdi Sql Management"
 
 
 
-    local procedure AddParamenter(var SqlParamenter: Record "jdi Sql Parameter" temporary; var SqlCommand: DotNet SqlCommand)
+    local procedure AddParameter(var SqlParameter: Record "jdi Sql Parameter" temporary; var SqlCommand: DotNet SqlCommand)
     begin
-        if SqlParamenter.FindSet() then
+        if SqlParameter.FindSet() then
             repeat
-                SqlCommand.Parameters.AddWithValue(SqlParamenter.Name, SqlParamenter.Value);
-            until SqlParamenter.Next() = 0;
+                SqlCommand.Parameters.AddWithValue(SqlParameter.Name, SqlParameter.Value);
+            until SqlParameter.Next() = 0;
     end;
 }

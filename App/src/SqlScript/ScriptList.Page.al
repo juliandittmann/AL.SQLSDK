@@ -146,56 +146,56 @@ page 50104 "jdi Sql Script List"
                 end;
             }
 
-            group(Paramenter)
+            group(Parameter)
             {
-                Caption = 'Paramenter';
+                Caption = 'Parameter';
                 Image = AboutNav;
 
-                action(ShowSqlParamenter)
+                action(ShowSqlParameter)
                 {
-                    Caption = 'Show SqlParamenter';
-                    ToolTip = 'Deletes existing SqlParamenter and creates new SqlParamenter';
+                    Caption = 'Show SqlParameter';
+                    ToolTip = 'Deletes existing SqlParameter and creates new SqlParameter';
                     ApplicationArea = all;
                     Scope = Page;
                     Image = EditList;
 
                     trigger OnAction()
                     var
-                        SqlParamenter: Record "jdi Sql Parameter";
-                        SqlParamenterList: Page "jdi Sql Parameter List";
+                        SqlParameter: Record "jdi Sql Parameter";
+                        SqlParameterList: Page "jdi Sql Parameter List";
                     begin
-                        SqlParamenter.SetRange("Sql Script No.", Rec."No.");
-                        if SqlParamenter.FindSet() then;
-                        SqlParamenterList.SetTableView(SqlParamenter);
-                        SqlParamenterList.RunModal();
+                        SqlParameter.SetRange("Sql Script No.", Rec."No.");
+                        if SqlParameter.FindSet() then;
+                        SqlParameterList.SetTableView(SqlParameter);
+                        SqlParameterList.RunModal();
                     end;
                 }
 
-                action(ReCreateSqlParamenter)
+                action(ReCreateSqlParameter)
                 {
-                    Caption = 'Recreate SqlParamenter';
-                    ToolTip = 'Deletes existing SqlParamenter and creates new SqlParamenter';
+                    Caption = 'Recreate SqlParameter';
+                    ToolTip = 'Deletes existing SqlParameter and creates new SqlParameter';
                     ApplicationArea = all;
                     Scope = Page;
                     Image = CreateDocument;
 
                     trigger OnAction()
                     begin
-                        Rec.CreateSqlParamenter();
+                        Rec.CreateSqlParameter();
                     end;
                 }
 
                 action(DeleteSqlParementer)
                 {
-                    Caption = 'Delete SqlParamenter';
-                    ToolTip = 'Deletes existing SqlParamenter.';
+                    Caption = 'Delete SqlParameter';
+                    ToolTip = 'Deletes existing SqlParameter.';
                     ApplicationArea = all;
                     Scope = Page;
                     Image = Delete;
 
                     trigger OnAction()
                     begin
-                        Rec.DeleteSqlParamenter();
+                        Rec.DeleteSqlParameter();
                     end;
                 }
             }

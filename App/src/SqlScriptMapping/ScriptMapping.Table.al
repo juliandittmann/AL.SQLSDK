@@ -61,21 +61,21 @@ table 50104 "jdi Sql Script Mapping"
     var
         SqlConnection: Record "jdi Sql Connection";
         SqlScript: Record "jdi Sql Script";
-        SqlParamenter: Record "jdi Sql Parameter";
+        SqlParameter: Record "jdi Sql Parameter";
         SqlScriptText: Text;
         ScalarResponse: Variant;
     begin
         if SqlScript.Get("Sql Script No.") then
             if SqlScript.GetScript(SqlScriptText) then begin
                 SqlConnection.Get("Sql Connection No.");
-                SqlScript.SqlParamenterExist(SqlParamenter);
+                SqlScript.SqlParameterExist(SqlParameter);
 
                 case SqlScript."Script Type" of
                     SqlScript."Script Type"::"Non Query":
-                        SqlConnection.ExecuteNonQuery(SqlScriptText, SqlParamenter);
+                        SqlConnection.ExecuteNonQuery(SqlScriptText, SqlParameter);
                     SqlScript."Script Type"::Scalar:
                         begin
-                            SqlConnection.ExecuteScalar(SqlScriptText, SqlParamenter, ScalarResponse);
+                            SqlConnection.ExecuteScalar(SqlScriptText, SqlParameter, ScalarResponse);
                             Message(Format(ScalarResponse)); //TODO: Evtl. nicht via Message ausgeben
                         end;
                 end;
@@ -84,12 +84,12 @@ table 50104 "jdi Sql Script Mapping"
                 "Executed by" := UserSecurityId();
                 Modify(false);
 
-                OnAfterSqlScriptExecution(Rec, SqlScript, SqlParamenter)
+                OnAfterSqlScriptExecution(Rec, SqlScript, SqlParameter)
             end;
     end;
 
     [IntegrationEvent(true, false)]
-    local procedure OnAfterSqlScriptExecution(var SqlScriptMapping: Record "jdi Sql Script Mapping"; var SqlScript: Record "jdi Sql Script"; var SqlParamenter: Record "jdi Sql Parameter")
+    local procedure OnAfterSqlScriptExecution(var SqlScriptMapping: Record "jdi Sql Script Mapping"; var SqlScript: Record "jdi Sql Script"; var SqlParameter: Record "jdi Sql Parameter")
     begin
     end;
 }

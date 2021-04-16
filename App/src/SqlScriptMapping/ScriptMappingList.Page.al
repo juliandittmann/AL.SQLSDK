@@ -106,15 +106,15 @@ page 50109 "jdi Sql Script Mapping List"
                 end;
             }
 
-            group(Paramenter)
+            group(Parameter)
             {
-                Caption = 'Paramenter';
+                Caption = 'Parameter';
                 Image = AboutNav;
 
-                action(ShowSqlParamenter)
+                action(ShowSqlParameter)
                 {
-                    Caption = 'Show SqlParamenter';
-                    ToolTip = 'Deletes existing SqlParamenter and creates new SqlParamenter';
+                    Caption = 'Show SqlParameter';
+                    ToolTip = 'Deletes existing SqlParameter and creates new SqlParameter';
                     ApplicationArea = all;
                     Scope = Page;
                     Image = EditList;
@@ -122,22 +122,22 @@ page 50109 "jdi Sql Script Mapping List"
                     trigger OnAction()
                     var
                         SqlScript: Record "jdi Sql Script";
-                        SqlParamenter: Record "jdi Sql Parameter";
-                        SqlParamenterList: Page "jdi Sql Paramenter List";
+                        SqlParameter: Record "jdi Sql Parameter";
+                        SqlParameterList: Page "jdi Sql Parameter List";
                     begin
                         if SqlScript.Get(Rec."Sql Script No.") then begin
-                            SqlParamenter.SetRange("Sql Script No.", SqlScript."No.");
-                            if SqlParamenter.FindSet() then;
-                            SqlParamenterList.SetTableView(SqlParamenter);
-                            SqlParamenterList.RunModal();
+                            SqlParameter.SetRange("Sql Script No.", SqlScript."No.");
+                            if SqlParameter.FindSet() then;
+                            SqlParameterList.SetTableView(SqlParameter);
+                            SqlParameterList.RunModal();
                         end;
                     end;
                 }
 
-                action(ReCreateSqlParamenter)
+                action(ReCreateSqlParameter)
                 {
-                    Caption = 'Recreate SqlParamenter';
-                    ToolTip = 'Deletes existing SqlParamenter and creates new SqlParamenter';
+                    Caption = 'Recreate SqlParameter';
+                    ToolTip = 'Deletes existing SqlParameter and creates new SqlParameter';
                     ApplicationArea = all;
                     Scope = Page;
                     Image = CreateDocument;
@@ -147,14 +147,14 @@ page 50109 "jdi Sql Script Mapping List"
                         SqlScript: Record "jdi Sql Script";
                     begin
                         if SqlScript.Get(Rec."Sql Script No.") then
-                            SqlScript.CreateSqlParamenter();
+                            SqlScript.CreateSqlParameter();
                     end;
                 }
 
                 action(DeleteSqlParementer)
                 {
-                    Caption = 'Delete SqlParamenter';
-                    ToolTip = 'Deletes existing SqlParamenter.';
+                    Caption = 'Delete SqlParameter';
+                    ToolTip = 'Deletes existing SqlParameter.';
                     ApplicationArea = all;
                     Scope = Page;
                     Image = Delete;
@@ -164,7 +164,7 @@ page 50109 "jdi Sql Script Mapping List"
                         SqlScript: Record "jdi Sql Script";
                     begin
                         if SqlScript.Get(Rec."Sql Script No.") then
-                            SqlScript.DeleteSqlParamenter();
+                            SqlScript.DeleteSqlParameter();
                     end;
                 }
             }

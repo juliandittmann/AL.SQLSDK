@@ -3,12 +3,12 @@ codeunit 50104 "jdi Sql Script Exec Mgt"
     Access = Internal;
 
     [EventSubscriber(ObjectType::Table, Database::"jdi Sql Script Mapping", 'OnAfterSqlScriptExecution', '', false, false)]
-    local procedure LogScriptExecution(SqlScriptMapping: Record "jdi Sql Script Mapping"; SqlScript: Record "jdi Sql Script"; var SqlParamenter: Record "jdi Sql Parameter")
+    local procedure LogScriptExecution(SqlScriptMapping: Record "jdi Sql Script Mapping"; SqlScript: Record "jdi Sql Script"; var SqlParameter: Record "jdi Sql Parameter")
     var
         EntryNo: Integer;
     begin
         EntryNo := CreateSqlScriptExecutionEntry(SqlScriptMapping, SqlScript);
-        CreateSqlScriptExecutionParamenters(EntryNo, SqlParamenter);
+        CreateSqlScriptExecutionParameters(EntryNo, SqlParameter);
     end;
 
     local procedure CreateSqlScriptExecutionEntry(SqlScriptMapping: Record "jdi Sql Script Mapping"; SqlScript: Record "jdi Sql Script"): Integer
@@ -27,22 +27,22 @@ codeunit 50104 "jdi Sql Script Exec Mgt"
         exit(SqlScriptExecutionEntry."Entry No.");
     end;
 
-    local procedure CreateSqlScriptExecutionParamenters(pEntryNo: Integer; var SqlScriptParamenter: Record "jdi Sql Parameter")
+    local procedure CreateSqlScriptExecutionParameters(pEntryNo: Integer; var SqlScriptParameter: Record "jdi Sql Parameter")
     var
         SqlScriptExecParameterEntry: Record "jdi Sql Script ExecParam Entry";
     begin
-        if SqlScriptParamenter.FindSet() then
+        if SqlScriptParameter.FindSet() then
             repeat
                 SqlScriptExecParameterEntry.Init();
                 SqlScriptExecParameterEntry."Execution Entry No." := pEntryNo;
                 SqlScriptExecParameterEntry."Entry No." := SqlScriptExecParameterEntry.GetNextEntryNo();
-                SqlScriptExecParameterEntry."Parameter Name" := SqlScriptParamenter.Name;
-                SqlScriptExecParameterEntry.Value := SqlScriptParamenter.Value;
+                SqlScriptExecParameterEntry."Parameter Name" := SqlScriptParameter.Name;
+                SqlScriptExecParameterEntry.Value := SqlScriptParameter.Value;
                 SqlScriptExecParameterEntry.Insert(true);
-            until SqlScriptParamenter.Next() = 0;
+            until SqlScriptParameter.Next() = 0;
     end;
 
-    procedure ShowParamenterList(SqlScriptExecutionEntry: Record "jdi Sql Script Exec Entry")
+    procedure ShowParameterList(SqlScriptExecutionEntry: Record "jdi Sql Script Exec Entry")
     var
         SqlScriptExecParamEntry: Record "jdi Sql Script ExecParam Entry";
         ParamList: Page "jdi Sql Script ExecP EntryList";

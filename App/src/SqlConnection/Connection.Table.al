@@ -167,11 +167,11 @@ table 50100 "jdi Sql Connection"
         SqlMgt.ExecuteNonQuery(Rec, SqlStatement);
     end;
 
-    procedure ExecuteNonQuery(SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary)
+    procedure ExecuteNonQuery(SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary)
     var
         SqlMgt: Codeunit "jdi Sql Management";
     begin
-        SqlMgt.ExecuteNonQuery(Rec, SqlStatement, SqlParamenter);
+        SqlMgt.ExecuteNonQuery(Rec, SqlStatement, SqlParameter);
     end;
 
     [TryFunction]
@@ -207,25 +207,25 @@ table 50100 "jdi Sql Connection"
     end;
 
 
-    procedure ExecuteScalar(SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary; var ResponseText: Text)
+    procedure ExecuteScalar(SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary; var ResponseText: Text)
     var
         SqlMgt: Codeunit "jdi Sql Management";
     begin
-        SqlMgt.ExecuteScalar(Rec, SqlStatement, SqlParamenter, ResponseText);
+        SqlMgt.ExecuteScalar(Rec, SqlStatement, SqlParameter, ResponseText);
     end;
 
-    procedure ExecuteScalar(SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary; var ResponseDecimal: Decimal)
+    procedure ExecuteScalar(SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary; var ResponseDecimal: Decimal)
     var
         SqlMgt: Codeunit "jdi Sql Management";
     begin
-        SqlMgt.ExecuteScalar(Rec, SqlStatement, SqlParamenter, ResponseDecimal);
+        SqlMgt.ExecuteScalar(Rec, SqlStatement, SqlParameter, ResponseDecimal);
     end;
 
-    procedure ExecuteScalar(SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary; var ResponseVariant: Variant)
+    procedure ExecuteScalar(SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary; var ResponseVariant: Variant)
     var
         SqlMgt: Codeunit "jdi Sql Management";
     begin
-        SqlMgt.ExecuteScalar(Rec, SqlStatement, SqlParamenter, ResponseVariant);
+        SqlMgt.ExecuteScalar(Rec, SqlStatement, SqlParameter, ResponseVariant);
     end;
 
 
@@ -253,21 +253,21 @@ table 50100 "jdi Sql Connection"
 
 
     [TryFunction]
-    procedure TryExecuteScalar(SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary; var ResponseText: Text)
+    procedure TryExecuteScalar(SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary; var ResponseText: Text)
     begin
-        ExecuteScalar(SqlStatement, SqlParamenter, ResponseText);
+        ExecuteScalar(SqlStatement, SqlParameter, ResponseText);
     end;
 
     [TryFunction]
-    procedure TryExecuteScalar(SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary; var ResponseDecimal: Decimal)
+    procedure TryExecuteScalar(SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary; var ResponseDecimal: Decimal)
     begin
-        ExecuteScalar(SqlStatement, SqlParamenter, ResponseDecimal);
+        ExecuteScalar(SqlStatement, SqlParameter, ResponseDecimal);
     end;
 
     [TryFunction]
-    procedure TryExecuteScalar(SqlStatement: Text; var SqlParamenter: Record "jdi Sql Parameter" temporary; var ResponseVariant: Variant)
+    procedure TryExecuteScalar(SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary; var ResponseVariant: Variant)
     begin
-        ExecuteScalar(SqlStatement, SqlParamenter, ResponseVariant);
+        ExecuteScalar(SqlStatement, SqlParameter, ResponseVariant);
     end;
 
 

@@ -12,7 +12,7 @@ permissionset 50100 "SQL API"
                   page "jdi Sql Connection Card" = X,
                   page "jdi Sql Connection List" = X,
                   page "jdi Sql Connection String" = X,
-                  page "jdi Sql Paramenter List" = X,
+                  page "jdi Sql Parameter List" = X,
                   page "jdi Sql sampleviewPage" = X,
                   page "jdi Sql Script Archive List" = X,
                   page "jdi Sql Script Editor" = X,

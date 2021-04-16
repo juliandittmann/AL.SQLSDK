@@ -51,14 +51,14 @@ page 50107 "jdi Sql Script Exec Entry List"
                     ApplicationArea = All;
                 }
 
-                field("Executed with Paramenter"; Rec."Executed with Paramenter")
+                field("Executed with Parameter"; Rec."Executed with Parameter")
                 {
                     ApplicationArea = all;
                     Editable = false;
 
                     trigger OnDrillDown()
                     begin
-                        SqlScriptExecutionMgt.ShowParamenterList(Rec);
+                        SqlScriptExecutionMgt.ShowParameterList(Rec);
                     end;
                 }
             }
@@ -69,11 +69,11 @@ page 50107 "jdi Sql Script Exec Entry List"
     {
         area(Navigation)
         {
-            action(ShowExecutionParamenter)
+            action(ShowExecutionParameter)
             {
                 ApplicationArea = all;
                 Caption = 'Show Execution Parameter';
-                ToolTip = 'Shows paramenter which the script was executed with.';
+                ToolTip = 'Shows parameter which the script was executed with.';
 
                 Promoted = true;
                 PromotedIsBig = true;
@@ -84,7 +84,7 @@ page 50107 "jdi Sql Script Exec Entry List"
 
                 trigger OnAction()
                 begin
-                    SqlScriptExecutionMgt.ShowParamenterList(Rec);
+                    SqlScriptExecutionMgt.ShowParameterList(Rec);
                 end;
             }
         }

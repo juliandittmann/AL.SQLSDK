@@ -1,17 +1,17 @@
 codeunit 50103 "jdi Sql Parameter Mgt"
 {
     Access = Internal;
-    procedure CreateSqlParamenter(SQLScript: Record "jdi Sql Script")
+    procedure CreateSqlParameter(SQLScript: Record "jdi Sql Script")
     var
-        ParamenterList: List of [Text];
+        ParameterList: List of [Text];
         Parameter: Text;
     begin
-        ParamenterList := FindSqlParamenter(SQLScript);
-        foreach Parameter in ParamenterList do
-            InsertSqlParamenter(SQLScript, Parameter);
+        ParameterList := FindSqlParameter(SQLScript);
+        foreach Parameter in ParameterList do
+            InsertSqlParameter(SQLScript, Parameter);
     end;
 
-    local procedure FindSqlParamenter(SQLScript: Record "jdi Sql Script") ParameterList: List of [Text];
+    local procedure FindSqlParameter(SQLScript: Record "jdi Sql Script") ParameterList: List of [Text];
     var
         Matches: Record Matches;
         Regex: Codeunit Regex;
@@ -27,14 +27,14 @@ codeunit 50103 "jdi Sql Parameter Mgt"
         end;
     end;
 
-    local procedure InsertSqlParamenter(SQLScript: Record "jdi Sql Script"; ParamenterName: Text)
+    local procedure InsertSqlParameter(SQLScript: Record "jdi Sql Script"; ParameterName: Text)
     var
-        SqlParamenter: Record "jdi Sql Parameter";
+        SqlParameter: Record "jdi Sql Parameter";
     begin
-        SqlParamenter.Init();
-        SqlParamenter."Sql Script No." := SQLScript."No.";
-        SqlParamenter.Name := CopyStr(ParamenterName, 1, 250);
-        if not SqlParamenter.Insert(true) then
-            SqlParamenter.Modify(true);
+        SqlParameter.Init();
+        SqlParameter."Sql Script No." := SQLScript."No.";
+        SqlParameter.Name := CopyStr(ParameterName, 1, 250);
+        if not SqlParameter.Insert(true) then
+            SqlParameter.Modify(true);
     end;
 }

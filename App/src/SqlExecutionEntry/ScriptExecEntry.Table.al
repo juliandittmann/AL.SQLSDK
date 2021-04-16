@@ -63,7 +63,7 @@ table 50106 "jdi Sql Script Exec Entry"
             CalcFormula = lookup(User."User Name" where("User Security ID" = field("Executed by")));
         }
 
-        field(20; "Executed with Paramenter"; Boolean)
+        field(20; "Executed with Parameter"; Boolean)
         {
             Caption = 'Executed with Parameter';
             Editable = false;

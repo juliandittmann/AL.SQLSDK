@@ -133,21 +133,21 @@ table 50102 "jdi Sql Script"
         Rec.Validate("Last Change Date", CurrentDateTime());
         Rec."Changed by" := UserSecurityId();
 
-        CreateSqlParamenter();
+        CreateSqlParameter();
     end;
 
     trigger OnModify()
     var
-        ConfirmQst: Label 'Do you want to overwrite SqlParamenter?';
+        ConfirmQst: Label 'Do you want to overwrite SqlParameter?';
     begin
-        if SqlParamenterExist() then
+        if SqlParameterExist() then
             if Confirm(ConfirmQst) then
-                ReCreateSqlParamenter();
+                ReCreateSqlParameter();
     end;
 
     trigger OnDelete()
     begin
-        DeleteSqlParamenter();
+        DeleteSqlParameter();
     end;
 
     local procedure CreateSha256Hash(TempBlob: Codeunit "Temp Blob"): Text[64]
@@ -303,40 +303,40 @@ table 50102 "jdi Sql Script"
         end;
     end;
 
-    procedure DeleteSqlParamenter()
+    procedure DeleteSqlParameter()
     var
-        SqlParamenter: Record "jdi Sql Parameter";
+        SqlParameter: Record "jdi Sql Parameter";
     begin
-        SqlParamenter.SetRange("Sql Script No.", Rec."No.");
-        if SqlParamenter.FindSet() then
-            SqlParamenter.DeleteAll(true);
+        SqlParameter.SetRange("Sql Script No.", Rec."No.");
+        if SqlParameter.FindSet() then
+            SqlParameter.DeleteAll(true);
     end;
 
-    procedure CreateSqlParamenter()
+    procedure CreateSqlParameter()
     var
         SqlParameterMgt: Codeunit "jdi Sql Parameter Mgt";
     begin
-        SqlParameterMgt.CreateSqlParamenter(Rec);
+        SqlParameterMgt.CreateSqlParameter(Rec);
     end;
 
-    procedure ReCreateSqlParamenter()
+    procedure ReCreateSqlParameter()
     begin
-        DeleteSqlParamenter();
-        CreateSqlParamenter();
+        DeleteSqlParameter();
+        CreateSqlParameter();
     end;
 
-    procedure SqlParamenterExist(): Boolean;
+    procedure SqlParameterExist(): Boolean;
     var
-        SqlParamenter: Record "jdi Sql Parameter";
+        SqlParameter: Record "jdi Sql Parameter";
     begin
-        SqlParamenter.SetRange("Sql Script No.", Rec."No.");
-        exit(not SqlParamenter.IsEmpty());
+        SqlParameter.SetRange("Sql Script No.", Rec."No.");
+        exit(not SqlParameter.IsEmpty());
     end;
 
-    procedure SqlParamenterExist(var SqlParamenter: Record "jdi Sql Parameter"): Boolean;
+    procedure SqlParameterExist(var SqlParameter: Record "jdi Sql Parameter"): Boolean;
     begin
-        SqlParamenter.SetRange("Sql Script No.", Rec."No.");
-        exit(not SqlParamenter.IsEmpty());
+        SqlParameter.SetRange("Sql Script No.", Rec."No.");
+        exit(not SqlParameter.IsEmpty());
     end;
 
 
