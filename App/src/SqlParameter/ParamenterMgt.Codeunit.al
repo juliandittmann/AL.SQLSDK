@@ -14,18 +14,17 @@ codeunit 50103 "jdi Sql Paramenter Mgt"
 
     local procedure FindSqlParamenter(Script: Record "jdi Sql Script"; var ParameterList: List of [Text])
     var
-        Regex: DotNet Regex;
-        MatchCollection: DotNet MatchCollection;
-        Match: DotNet Match;
+        Matches: Record Matches;
+        Regex: Codeunit Regex;
         ScriptText: Text;
         SqlParemeterRegExLbl: Label '\@([^=<>\s\''''|,|;]+)', Locked = true;
     begin
         if Script.GetScript(ScriptText) then begin
-            Regex := Regex.Regex(SqlParemeterRegExLbl);
-            MatchCollection := Regex.Matches(ScriptText);
-
-            foreach Match in MatchCollection do
-                ParameterList.Add(Match.Value.Remove(0, 1)); //Removes @ Character
+            Regex.Match(ScriptText, SqlParemeterRegExLbl, Matches);
+            if Matches.FindSet() then
+                repeat
+                    ParameterList.Add(Matches.ReadValue().Remove(0, 1))
+                until Matches.Next() = 0;
         end;
     end;
 
