@@ -77,25 +77,16 @@ codeunit 50102 "jdi Sql Management"
     begin
         SqlConnection := SqlConnection.SqlConnection(pSqlConnection.GetConnectionString());
 
-        SqlConnection.Open();
-
-        SqlCommand := SqlCommand.SqlCommand();
-        SqlCommand.CommandText := SqlStatement;
-        SqlCommand.Connection := SqlConnection;
-        SqlCommand.CommandType := SqlCommand.CommandType.Text;
-        SqlCommand.CommandTimeout := 0;
-
+        SqlCommand := SqlCommand.SqlCommand(SqlStatement, SqlConnection);
         AddParamenter(SqlParamenter, SqlCommand);
 
+        SqlConnection.Open();
         SqlCommand.ExecuteNonQuery();
         SqlConnection.Close();
 
         Clear(SqlCommand);
         Clear(SqlConnection);
     end;
-
-
-
 
     //  Scalar
 
@@ -338,24 +329,16 @@ codeunit 50102 "jdi Sql Management"
     begin
         SqlConnection := SqlConnection.SqlConnection(pSqlConnection.GetConnectionString());
 
-        SqlConnection.Open();
-
-        SqlCommand := SqlCommand.SqlCommand();
-        SqlCommand.CommandText := SqlStatement;
-        SqlCommand.Connection := SqlConnection;
-        SqlCommand.CommandType := SqlCommand.CommandType.Text;
-        SqlCommand.CommandTimeout := 0;
-
+        SqlCommand := SqlCommand.SqlCommand(SqlStatement, SqlConnection);
         AddParamenter(SqlParamenter, SqlCommand);
 
+        SqlConnection.Open();
         ResponseVariant := SqlCommand.ExecuteScalar();
         SqlConnection.Close();
 
         Clear(SqlCommand);
         Clear(SqlConnection);
     end;
-
-
 
     //Try - Text - SQLConnection - SQLParamenter
     [TryFunction]
