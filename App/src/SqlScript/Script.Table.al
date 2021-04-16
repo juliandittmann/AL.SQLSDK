@@ -152,21 +152,12 @@ table 50102 "jdi Sql Script"
 
     local procedure CreateSha256Hash(TempBlob: Codeunit "Temp Blob"): Text[64]
     var
-        SHA256: DotNet SHA256CryptoServiceProvider;
-        StreamReader: DotNet StreamReader;
-        ContentEncoding: DotNet Encoding;
-        BitConverter: DotNet BitConverter;
-        ContentArray: DotNet Array;
+        CryptographyMgt: Codeunit "Cryptography Management";
+        HashAlgorithmType: Option MD5,SHA1,SHA256,SHA384,SHA512;
         InStr: InStream;
     begin
         TempBlob.CreateInStream(InStr, TextEncoding::UTF8);
-        StreamReader := StreamReader.StreamReader(InStr, ContentEncoding.UTF8, true);
-
-        SHA256 := SHA256.SHA256CryptoServiceProvider();
-        ContentArray := ContentEncoding.UTF8.GetBytes(StreamReader.ReadToEnd());
-        ContentArray := SHA256.ComputeHash(ContentArray);
-
-        exit(CopyStr(DelChr(BitConverter.ToString(ContentArray), '=', '-'), 1, 64));
+        exit(CopyStr(CryptographyMgt.GenerateHash(InStr, HashAlgorithmType::SHA256), 1, 64));
     end;
 
 
