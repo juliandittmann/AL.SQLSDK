@@ -22,7 +22,7 @@ codeunit 50103 "jdi Sql Parameter Mgt"
             Regex.Match(ScriptText, SqlParemeterRegExLbl, Matches);
             if Matches.FindSet() then
                 repeat
-                    ParameterList.Add(Matches.ReadValue().Remove(0, 1))
+                    ParameterList.Add(Matches.ReadValue().Remove(1, 1));
                 until Matches.Next() = 0;
         end;
     end;
