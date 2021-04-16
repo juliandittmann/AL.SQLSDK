@@ -70,7 +70,7 @@ codeunit 50102 "jdi Sql Management"
         ExecuteNonQuery(pSqlConnection, SqlStatement, TempSqlParameter);
     end;
 
-    procedure ExecuteNonQuery(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var "; SqlStatement: Text; var SqlParameter: Record ": Record "jdi Sql Parameter" temporary)
+    procedure ExecuteNonQuery(pSqlConnection: Record "jdi Sql Connection"; SqlStatement: Text; var SqlParameter: Record "jdi Sql Parameter" temporary)
     var
         SqlConnection: DotNet SqlConnection;
         SqlCommand: DotNet SqlCommand;
@@ -85,7 +85,7 @@ codeunit 50102 "jdi Sql Management"
         SqlCommand.CommandType := SqlCommand.CommandType.Text;
         SqlCommand.CommandTimeout := 0;
 
-        AddParameter("; SqlStatement: Text; var SqlParameter: Record ", SqlCommand);
+        AddParameter(SqlParameter, SqlCommand);
 
         SqlCommand.ExecuteNonQuery();
         SqlConnection.Close();
