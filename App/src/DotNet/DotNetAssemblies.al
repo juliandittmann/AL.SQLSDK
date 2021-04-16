@@ -2,11 +2,6 @@
 dotnet
 {
 
-    assembly(System.Core)
-    {
-        type(System.Security.Cryptography.SHA256CryptoServiceProvider; SHA256CryptoServiceProvider) { }
-    }
-
     assembly(System.Data)
     {
         type(System.Data.SqlDbType; SqlDbType) { }
