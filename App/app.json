@@ -1,6 +1,6 @@
 {
   "id": "f57e9f77-083c-477e-8d75-442c3cf41942",
-  "name": "Sql API",
+  "name": "SQL API",
   "publisher": "Julian Dittmann",
   "version": "18.0.0.0",
   "brief": "",
@@ -8,7 +8,7 @@
   "privacyStatement": "",
   "EULA": "",
   "help": "",
-  "url": "",
+  "url": "https://github.com/juliandittmann/AL.SqlAPI",
   "logo": "",
   "dependencies": [
   ],

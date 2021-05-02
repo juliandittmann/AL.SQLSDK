@@ -1,4 +1,4 @@
-table 50101 "jdi Sql sampleview"
+table 50200 "jdi SQL Demo sampleview"
 {
     Caption = 'sampleview';
     DataClassification = CustomerContent;

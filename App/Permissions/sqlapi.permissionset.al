@@ -1,4 +1,4 @@
-permissionset 50100 "SQL API"
+permissionset 50100 "jdi Sql SQL API"
 {
     Access = Public;
     Assignable = true;
@@ -13,7 +13,6 @@ permissionset 50100 "SQL API"
                   page "jdi Sql Connection List" = X,
                   page "jdi Sql Connection String" = X,
                   page "jdi Sql Parameter List" = X,
-                  page "jdi Sql sampleviewPage" = X,
                   page "jdi Sql Script Archive List" = X,
                   page "jdi Sql Script Editor" = X,
                   page "jdi Sql Script Exec Entry List" = X,
@@ -23,7 +22,6 @@ permissionset 50100 "SQL API"
                   page "jdi Sql Script Viewer" = X,
                   table "jdi Sql Connection" = X,
                   table "jdi Sql Parameter" = X,
-                  table "jdi Sql sampleview" = X,
                   table "jdi Sql Script" = X,
                   table "jdi Sql Script Archive" = X,
                   table "jdi Sql Script Exec Entry" = X,
@@ -31,7 +29,6 @@ permissionset 50100 "SQL API"
                   table "jdi Sql Script Mapping" = X,
                   tabledata "jdi Sql Connection" = RIMD,
                   tabledata "jdi Sql Parameter" = RIMD,
-                  tabledata "jdi Sql sampleview" = RIMD,
                   tabledata "jdi Sql Script" = RIMD,
                   tabledata "jdi Sql Script Archive" = RIMD,
                   tabledata "jdi Sql Script Exec Entry" = RIMD,
