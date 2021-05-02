@@ -1,7 +1,7 @@
-page 50103 "jdi Sql sampleviewPage"
+page 50200 "jdi SQL Demo sampleviewPage"
 {
     PageType = List;
-    SourceTable = "jdi Sql sampleview";
+    SourceTable = "jdi Sql Demo sampleview";
     UsageCategory = None;
 
     Caption = 'SampleView from SQL Server';

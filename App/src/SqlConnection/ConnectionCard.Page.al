@@ -145,25 +145,6 @@ page 50101 "jdi Sql Connection Card"
                     AuthenticationOnAfterValidate();
                 end;
             }
-
-            group(Test)
-            {
-                Image = TestFile;
-
-                action(Test4)
-                {
-                    Caption = 'Show View';
-                    ApplicationArea = All;
-                    Image = TestReport;
-
-                    trigger OnAction()
-                    var
-                        SqlView: Page "jdi Sql sampleviewPage";
-                    begin
-                        SqlView.Run();
-                    end;
-                }
-            }
         }
     }
 
