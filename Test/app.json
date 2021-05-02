@@ -1,0 +1,64 @@
+{
+  "id": "831e0026-a68f-41fd-ba3f-22ec54b0040f",
+  "name": "SQL API Test",
+  "publisher": "Julian Dittmann",
+  "brief": "Testtool for SQL API",
+  "description": "SQL API Test",
+  "version": "18.0.0.0",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "https://github.com/juliandittmann/AL.SqlAPI",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
+      "publisher": "Microsoft",
+      "name": "Library Assert",
+      "version": "18.0.0.0"
+    },
+    {
+      "id": "e7320ebb-08b3-4406-b1ec-b4927d3e280b",
+      "publisher": "Microsoft",
+      "name": "Any",
+      "version": "18.0.0.0"
+    },
+    {
+      "id": "5d86850b-0d76-4eca-bd7b-951ad998e997",
+      "publisher": "Microsoft",
+      "name": "Tests-TestLibraries",
+      "version": "18.0.0.0"
+    },
+    {
+      "name": "Test Runner",
+      "publisher": "Microsoft",
+      "version": "18.0.0.0",
+      "id": "23de40a6-dfe8-4f80-80db-d70f83ce8caf"
+    },
+    {
+      "name": "SQL API",
+      "publisher": "Julian Dittmann",
+      "version": "18.0.0.0",
+      "id": "f57e9f77-083c-477e-8d75-442c3cf41942"
+    }
+  ],
+  "screenshots": [],
+  "application": "18.0.0.0",
+  "platform": "18.0.0.0",
+  "runtime": "7.0",
+  "target": "Cloud",
+  "showMyCode": true,
+  "idRanges":[
+    {
+      "from": 50150,
+      "to": 50199
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://example.com/help/",
+  "features": [
+    "TranslationFile"
+  ],
+  "supportedLocales": [
+    "en-US"
+  ]
+}
