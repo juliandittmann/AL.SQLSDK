@@ -18,12 +18,11 @@ var SqlEditor;
         $navControlContainer.append(Html);
 
         $editor = ace.edit(Config.Editor, {
-            maxLines: 150,
-            minLines: 50,
+            minLines: 60,
+            maxLines: 60,
             mode: "ace/mode/sql",
             theme: "ace/theme/sqlserver",
-            bug: 1,
-            autoScrollEditorIntoView: true
+            bug: 1
         });
 
         Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('GetCode', null);
