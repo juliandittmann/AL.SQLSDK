@@ -1,29 +1,14 @@
-[![Current](https://github.com/juliandittmann/AL.SqlAPI/actions/workflows/current.yml/badge.svg)](https://github.com/juliandittmann/AL.SqlAPI/actions/workflows/current.yml)
+[![Current](https://github.com/juliandittmann/AL.SQLSDK/actions/workflows/current.yml/badge.svg)](https://github.com/juliandittmann/AL.SQLSDK/actions/workflows/current.yml)
 
-# SqlAPI
+# SQL SDK
 
-Kontrolle über SQL Server aus Dynamcis 365 Business Central übernehmen.
+Take control of SQL Server from Dynamcis 365 Business Central.
 
-## Featurelist
+## Features
 
-+  Sql-Server-Verbindungen Verwaltung
-    - Unterstützt ConnectionStrings
-    - Verbindungen Testen
-+ Sql-Script Verwaltung
-    - .sql - Datei Unterstützung
-    - Up-/Download von .sql Datein
-    - SqlScript Editor
-        * Syntax highlighting
-    - Eigenens Änderungsprotokoll
-    - Eigene Versionierung
-+ Sql-Script Execution
-    - Ausführen von SqlScripten
-        * NonQuerry
-        * Scalarfunctions
-    - Parameter Unterstützung
-        * Automatische Paramenter erkennung
-    - Execution Protokoll
-        * Paramenter werden auch protokolliert.
-    - Ausführung von Scripten über Code einfach möglich.
-
-    
+- Run SQL-scripts
+- Manage SQL-connections
+- Manage SQL-scripts
+- Track SQL executions
+- SQL-script history
+- Build-in SQL Script Editor    
