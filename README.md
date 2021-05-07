@@ -2,8 +2,7 @@
 
 # SQL SDK for Dynamics 365 Business Central
 
-Take control of SQL Server from Dynamcis 365 Business Central.
-This is a library which provides a set of tools that make it easy to access and manage SQL in AL. Take a look at the Getting Started documentation. The SQL SDK provides the following functionality:
+This is a library which provides a set of tools that make it easy to access and manage SQL scripts in AL. Take a look at the Getting Started documentation. The SQL SDK provides the following functionality:
 
 * **Run SQL-scripts**
 * **Manage SQL-connections**
