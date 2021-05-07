@@ -8,17 +8,9 @@ iframe.style.removeProperty('height');
 iframe.style.removeProperty('min-height');
 iframe.style.removeProperty('max-height');
 
-iframe.style.flexGrow = '1';
-iframe.style.flexShrink = '1';
-iframe.style.flexBasis = 'auto';
-iframe.style.paddingBottom = '42px';
-
-iframe.style.height = '700px';
-
+iframe.style.height = '-webkit-fill-available';
 
 var controlAddIn = document.getElementById('controlAddIn');
-controlAddIn.style.height = '100%';
-controlAddIn.style.width = 'inherit';
 
 $(document).ready(function () {
     $navControlContainer = $("#controlAddIn");

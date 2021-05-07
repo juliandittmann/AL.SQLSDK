@@ -14,28 +14,24 @@ page 50105 "jdi SQL Script Editor"
     {
         area(Content)
         {
-            group(Control)
+            usercontrol("SQL Editor"; "jdi SQL Editor")
             {
-                ShowCaption = false;
-                usercontrol("SQL Editor"; "jdi SQL Editor")
-                {
-                    ApplicationArea = all;
+                ApplicationArea = all;
 
-                    trigger ControlAddinLoaded()
-                    begin
-                        CurrPage."SQL Editor".CreateControl();
-                    end;
+                trigger ControlAddinLoaded()
+                begin
+                    CurrPage."SQL Editor".CreateControl();
+                end;
 
-                    trigger GetCode()
-                    begin
-                        SetCode();
-                    end;
+                trigger GetCode()
+                begin
+                    SetCode();
+                end;
 
-                    trigger Save(ModyfiedCode: Text)
-                    begin
-                        SaveAndClosePage(ModyfiedCode);
-                    end;
-                }
+                trigger Save(ModyfiedCode: Text)
+                begin
+                    SaveAndClosePage(ModyfiedCode);
+                end;
             }
         }
     }

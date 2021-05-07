@@ -14,23 +14,19 @@ page 50111 "jdi SQL Script Viewer"
     {
         area(Content)
         {
-            group(Control)
+            usercontrol("SQL Editor"; "jdi SQL Editor")
             {
-                ShowCaption = false;
-                usercontrol("SQL Editor"; "jdi SQL Editor")
-                {
-                    ApplicationArea = all;
+                ApplicationArea = all;
 
-                    trigger ControlAddinLoaded()
-                    begin
-                        CurrPage."SQL Editor".CreateControl();
-                    end;
+                trigger ControlAddinLoaded()
+                begin
+                    CurrPage."SQL Editor".CreateControl();
+                end;
 
-                    trigger GetCode()
-                    begin
-                        SetCode();
-                    end;
-                }
+                trigger GetCode()
+                begin
+                    SetCode();
+                end;
             }
         }
     }
