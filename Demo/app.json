@@ -1,18 +1,18 @@
 {
   "id": "16b38fe8-c4e1-4a95-9170-ee4748b65160",
-  "name": "SQL API Demo",
+  "name": "SQL SDK Demo",
   "publisher": "Julian Dittmann",
-  "brief": "Demo for SQL API",
-  "description": "Demo with examples for BingMaps SDK",
+  "brief": "Demo for SQL SDK",
+  "description": "Demo with examples for SQL SDK",
   "version": "18.0.0.0",
   "privacyStatement": "",
   "EULA": "",
   "help": "",
-  "url": "https://github.com/juliandittmann/AL.SqlAPI",
+  "url": "https://github.com/juliandittmann/AL.SQLSDK",
   "logo": "",
   "dependencies": [
     {
-      "name": "SQL API",
+      "name": "SQL SDK",
       "publisher": "Julian Dittmann",
       "version": "18.0.0.0",
       "id": "f57e9f77-083c-477e-8d75-442c3cf41942"
@@ -30,7 +30,6 @@
       "to": 50249
     }
   ],
-  "contextSensitiveHelpUrl": "https://example.com/help/",
   "features": [
     "TranslationFile"
   ],

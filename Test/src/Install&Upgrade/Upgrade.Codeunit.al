@@ -1,4 +1,4 @@
-codeunit 50152 "jdi SQL API Test Upgrade"
+codeunit 50152 "jdi SQL Test Upgrade"
 {
     Subtype = Upgrade;
 

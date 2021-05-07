@@ -21,6 +21,6 @@
     "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
     "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
     "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
-    "CRS.ObjectNamePrefix": "jdi Sql ",
+    "CRS.ObjectNamePrefix": "jdi SQL ",
     "CRS.RemovePrefixFromFilename": true
 }

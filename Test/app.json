@@ -1,14 +1,14 @@
 {
   "id": "831e0026-a68f-41fd-ba3f-22ec54b0040f",
-  "name": "SQL API Test",
+  "name": "SQL SDK Test",
   "publisher": "Julian Dittmann",
   "brief": "Testtool for SQL API",
-  "description": "SQL API Test",
+  "description": "SQL SDK Test",
   "version": "18.0.0.0",
   "privacyStatement": "",
   "EULA": "",
   "help": "",
-  "url": "https://github.com/juliandittmann/AL.SqlAPI",
+  "url": "https://github.com/juliandittmann/AL.SQLSDK",
   "logo": "",
   "dependencies": [
     {
@@ -36,7 +36,7 @@
       "id": "23de40a6-dfe8-4f80-80db-d70f83ce8caf"
     },
     {
-      "name": "SQL API",
+      "name": "SQL SDK",
       "publisher": "Julian Dittmann",
       "version": "18.0.0.0",
       "id": "f57e9f77-083c-477e-8d75-442c3cf41942"
@@ -54,7 +54,6 @@
       "to": 50199
     }
   ],
-  "contextSensitiveHelpUrl": "https://example.com/help/",
   "features": [
     "TranslationFile"
   ],

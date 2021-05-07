@@ -1,4 +1,4 @@
-enum 50101 "jdi Sql File Type"
+enum 50101 "jdi SQL File Type"
 {
     Extensible = true;
     value(0; " ")

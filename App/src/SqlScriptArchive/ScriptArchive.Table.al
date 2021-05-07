@@ -1,13 +1,13 @@
-table 50105 "jdi Sql Script Archive"
+table 50105 "jdi SQL Script Archive"
 {
     DataClassification = CustomerContent;
 
     fields
     {
-        field(1; "Sql Script No."; Code[20])
+        field(1; "SQL Script No."; Code[20])
         {
             DataClassification = CustomerContent;
-            TableRelation = "jdi Sql Script"."No.";
+            TableRelation = "jdi SQL Script"."No.";
             Editable = false;
         }
 
@@ -32,7 +32,7 @@ table 50105 "jdi Sql Script Archive"
             Editable = false;
         }
 
-        field(5; "File Type"; Enum "jdi Sql File Type")
+        field(5; "File Type"; Enum "jdi SQL File Type")
         {
             Caption = 'File Type';
             Editable = false;
@@ -83,7 +83,7 @@ table 50105 "jdi Sql Script Archive"
 
     keys
     {
-        key(PrimaryKey; "Sql Script No.", "Entry No.")
+        key(PrimaryKey; "SQL Script No.", "Entry No.")
         {
             Clustered = true;
         }
@@ -107,7 +107,7 @@ table 50105 "jdi Sql Script Archive"
     end;
 
     [TryFunction]
-    procedure GetScript(var SqlScript: Text)
+    procedure GetScript(var SQLScript: Text)
     var
         TempBlob: Codeunit "Temp Blob";
         DocumentOutStream: OutStream;
@@ -116,7 +116,7 @@ table 50105 "jdi Sql Script Archive"
         StreamReader: DotNet StreamReader;
         Encoding: DotNet Encoding;
     begin
-        Clear(SqlScript);
+        Clear(SQLScript);
 
         // Ensure document has value in DB
         if not File.HasValue() then
@@ -127,26 +127,26 @@ table 50105 "jdi Sql Script Archive"
         TempBlob.CreateInStream(DocumentInStream, TextEncoding::UTF8);
 
         StreamReader := StreamReader.StreamReader(DocumentInStream, Encoding.UTF8, true);
-        SqlScript := StreamReader.ReadToEnd();
+        SQLScript := StreamReader.ReadToEnd();
     end;
 
     procedure ViewScript()
     var
-        SqlScriptViewer: Page "jdi Sql Script Viewer";
+        SQLScriptViewer: Page "jdi SQL Script Viewer";
     begin
-        Clear(SqlScriptViewer);
-        SqlScriptViewer.SetRecord(Rec);
-        SqlScriptViewer.Run();
+        Clear(SQLScriptViewer);
+        SQLScriptViewer.SetRecord(Rec);
+        SQLScriptViewer.Run();
     end;
 
     procedure GetNextEntryNo() NextEntryNo: Integer
     var
-        SqlScriptArchive: Record "jdi Sql Script Archive";
+        SQLScriptArchive: Record "jdi SQL Script Archive";
     begin
-        TestField("Sql Script No.");
-        SqlScriptArchive.SetRange("Sql Script No.", Rec."Sql Script No.");
-        if SqlScriptArchive.FindLast() then
-            NextEntryNo := SqlScriptArchive."Entry No." + 1
+        TestField("SQL Script No.");
+        SQLScriptArchive.SetRange("SQL Script No.", Rec."SQL Script No.");
+        if SQLScriptArchive.FindLast() then
+            NextEntryNo := SQLScriptArchive."Entry No." + 1
         else
             NextEntryNo := 1;
     end;

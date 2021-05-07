@@ -1,9 +1,9 @@
-page 50107 "jdi Sql Script Exec Entry List"
+page 50107 "jdi SQL Script Exec Entry List"
 {
 
     PageType = List;
-    SourceTable = "jdi Sql Script Exec Entry";
-    Caption = 'Sql Script Execution Entry List';
+    SourceTable = "jdi SQL Script Exec Entry";
+    Caption = 'SQL Script Execution Entry List';
     ApplicationArea = All;
     UsageCategory = Lists;
 
@@ -17,12 +17,12 @@ page 50107 "jdi Sql Script Exec Entry List"
                 {
                     ApplicationArea = All;
                 }
-                field("Sql Connection No."; Rec."Sql Connection No.")
+                field("SQL Connection No."; Rec."SQL Connection No.")
                 {
                     ApplicationArea = All;
                 }
 
-                field("Sql Script No."; Rec."Sql Script No.")
+                field("SQL Script No."; Rec."SQL Script No.")
                 {
                     ApplicationArea = all;
                 }
@@ -38,7 +38,7 @@ page 50107 "jdi Sql Script Exec Entry List"
 
                     trigger OnDrillDown()
                     begin
-                        SqlScriptExecutionMgt.ShowScriptCode(Rec);
+                        SQLScriptExecutionMgt.ShowScriptCode(Rec);
                     end;
                 }
 
@@ -58,7 +58,7 @@ page 50107 "jdi Sql Script Exec Entry List"
 
                     trigger OnDrillDown()
                     begin
-                        SqlScriptExecutionMgt.ShowParameterList(Rec);
+                        SQLScriptExecutionMgt.ShowParameterList(Rec);
                     end;
                 }
             }
@@ -84,11 +84,11 @@ page 50107 "jdi Sql Script Exec Entry List"
 
                 trigger OnAction()
                 begin
-                    SqlScriptExecutionMgt.ShowParameterList(Rec);
+                    SQLScriptExecutionMgt.ShowParameterList(Rec);
                 end;
             }
         }
     }
     var
-        SqlScriptExecutionMgt: Codeunit "jdi Sql Script Exec Mgt";
+        SQLScriptExecutionMgt: Codeunit "jdi SQL Script Exec Mgt";
 }

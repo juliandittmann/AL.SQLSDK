@@ -1,4 +1,4 @@
-codeunit 50153 "jdi SQL API Test Default"
+codeunit 50153 "jdi SQL Test Default"
 {
     Subtype = Test;
     TestPermissions = Disabled;

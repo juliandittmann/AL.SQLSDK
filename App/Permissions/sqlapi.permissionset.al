@@ -1,8 +1,8 @@
-permissionset 50100 "jdi Sql SQL API"
+permissionset 50100 "jdi SQL SDK"
 {
     Access = Public;
     Assignable = true;
-    Caption = 'Sql API';
+    Caption = 'SQL SDK';
     Permissions = codeunit "jdi Sql Install" = X,
                   codeunit "jdi Sql Management" = X,
                   codeunit "jdi Sql Parameter Mgt" = X,

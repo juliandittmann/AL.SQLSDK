@@ -1,4 +1,4 @@
-codeunit 50101 "jdi Sql Update"
+codeunit 50101 "jdi SQL Update"
 {
     Access = Internal;
     Subtype = Upgrade;

@@ -1,4 +1,4 @@
-codeunit 50100 "jdi Sql Install"
+codeunit 50100 "jdi SQL Install"
 {
     Access = Internal;
     Subtype = Install;
@@ -7,7 +7,6 @@ codeunit 50100 "jdi Sql Install"
     begin
 
     end;
-
 
     trigger OnInstallAppPerDatabase()
     begin

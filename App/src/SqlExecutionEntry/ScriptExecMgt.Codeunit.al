@@ -1,73 +1,73 @@
-codeunit 50104 "jdi Sql Script Exec Mgt"
+codeunit 50104 "jdi SQL Script Exec Mgt"
 {
     Access = Internal;
 
-    [EventSubscriber(ObjectType::Table, Database::"jdi Sql Script Mapping", 'OnAfterSqlScriptExecution', '', false, false)]
-    local procedure LogScriptExecution(SqlScriptMapping: Record "jdi Sql Script Mapping"; SqlScript: Record "jdi Sql Script"; var SqlParameter: Record "jdi Sql Parameter")
+    [EventSubscriber(ObjectType::Table, Database::"jdi SQL Script Mapping", 'OnAfterSQLScriptExecution', '', false, false)]
+    local procedure LogScriptExecution(SQLScriptMapping: Record "jdi SQL Script Mapping"; SQLScript: Record "jdi SQL Script"; var SQLParameter: Record "jdi SQL Parameter")
     var
         EntryNo: Integer;
     begin
-        EntryNo := CreateSqlScriptExecutionEntry(SqlScriptMapping, SqlScript);
-        CreateSqlScriptExecutionParameters(EntryNo, SqlParameter);
+        EntryNo := CreateSQLScriptExecutionEntry(SQLScriptMapping, SQLScript);
+        CreateSQLScriptExecutionParameters(EntryNo, SQLParameter);
     end;
 
-    local procedure CreateSqlScriptExecutionEntry(SqlScriptMapping: Record "jdi Sql Script Mapping"; SqlScript: Record "jdi Sql Script"): Integer
+    local procedure CreateSQLScriptExecutionEntry(SQLScriptMapping: Record "jdi SQL Script Mapping"; SQLScript: Record "jdi SQL Script"): Integer
     var
-        SqlScriptExecutionEntry: Record "jdi Sql Script Exec Entry";
+        SQLScriptExecutionEntry: Record "jdi SQL Script Exec Entry";
     begin
-        SqlScriptExecutionEntry.Init();
-        SqlScriptExecutionEntry."Sql Connection No." := SqlScriptMapping."Sql Connection No.";
-        SqlScriptExecutionEntry."Sql Script No." := SqlScriptMapping."Sql Script No.";
-        SqlScriptExecutionEntry."Last Execution Date" := SqlScriptMapping."Last Execution Date";
-        SqlScriptExecutionEntry."Executed by" := SqlScriptMapping."Executed by";
-        SqlScriptExecutionEntry."Hash Code (SHA256)" := SqlScript."Hash Code (SHA256)";
-        SqlScriptExecutionEntry."File Name" := SqlScript."File Name";
-        SqlScriptExecutionEntry.Insert(true);
+        SQLScriptExecutionEntry.Init();
+        SQLScriptExecutionEntry."SQL Connection No." := SQLScriptMapping."SQL Connection No.";
+        SQLScriptExecutionEntry."SQL Script No." := SQLScriptMapping."SQL Script No.";
+        SQLScriptExecutionEntry."Last Execution Date" := SQLScriptMapping."Last Execution Date";
+        SQLScriptExecutionEntry."Executed by" := SQLScriptMapping."Executed by";
+        SQLScriptExecutionEntry."Hash Code (SHA256)" := SQLScript."Hash Code (SHA256)";
+        SQLScriptExecutionEntry."File Name" := SQLScript."File Name";
+        SQLScriptExecutionEntry.Insert(true);
 
-        exit(SqlScriptExecutionEntry."Entry No.");
+        exit(SQLScriptExecutionEntry."Entry No.");
     end;
 
-    local procedure CreateSqlScriptExecutionParameters(pEntryNo: Integer; var SqlScriptParameter: Record "jdi Sql Parameter")
+    local procedure CreateSQLScriptExecutionParameters(pEntryNo: Integer; var SQLScriptParameter: Record "jdi SQL Parameter")
     var
-        SqlScriptExecParameterEntry: Record "jdi Sql Script ExecParam Entry";
+        SQLScriptExecParameterEntry: Record "jdi SQL Script ExecParam Entry";
     begin
-        if SqlScriptParameter.FindSet() then
+        if SQLScriptParameter.FindSet() then
             repeat
-                SqlScriptExecParameterEntry.Init();
-                SqlScriptExecParameterEntry."Execution Entry No." := pEntryNo;
-                SqlScriptExecParameterEntry."Entry No." := SqlScriptExecParameterEntry.GetNextEntryNo();
-                SqlScriptExecParameterEntry."Parameter Name" := SqlScriptParameter.Name;
-                SqlScriptExecParameterEntry.Value := SqlScriptParameter.Value;
-                SqlScriptExecParameterEntry.Insert(true);
-            until SqlScriptParameter.Next() = 0;
+                SQLScriptExecParameterEntry.Init();
+                SQLScriptExecParameterEntry."Execution Entry No." := pEntryNo;
+                SQLScriptExecParameterEntry."Entry No." := SQLScriptExecParameterEntry.GetNextEntryNo();
+                SQLScriptExecParameterEntry."Parameter Name" := SQLScriptParameter.Name;
+                SQLScriptExecParameterEntry.Value := SQLScriptParameter.Value;
+                SQLScriptExecParameterEntry.Insert(true);
+            until SQLScriptParameter.Next() = 0;
     end;
 
-    procedure ShowParameterList(SqlScriptExecutionEntry: Record "jdi Sql Script Exec Entry")
+    procedure ShowParameterList(SQLScriptExecutionEntry: Record "jdi SQL Script Exec Entry")
     var
-        SqlScriptExecParamEntry: Record "jdi Sql Script ExecParam Entry";
-        ParamList: Page "jdi Sql Script ExecP EntryList";
+        SQLScriptExecParamEntry: Record "jdi SQL Script ExecParam Entry";
+        ParamList: Page "jdi SQL Script ExecP EntryList";
     begin
-        SqlScriptExecParamEntry.SetRange("Execution Entry No.", SqlScriptExecutionEntry."Entry No.");
-        ParamList.SetTableView(SqlScriptExecParamEntry);
+        SQLScriptExecParamEntry.SetRange("Execution Entry No.", SQLScriptExecutionEntry."Entry No.");
+        ParamList.SetTableView(SQLScriptExecParamEntry);
         ParamList.RunModal();
     end;
 
-    procedure ShowScriptCode(SqlScriptExecutionEntry: Record "jdi Sql Script Exec Entry")
+    procedure ShowScriptCode(SQLScriptExecutionEntry: Record "jdi SQL Script Exec Entry")
     var
-        SqlScript: Record "jdi Sql Script";
-        SqlScriptArchive: Record "jdi Sql Script Archive";
+        SQLScript: Record "jdi SQL Script";
+        SQLScriptArchive: Record "jdi SQL Script Archive";
     begin
-        SqlScript.SetRange("No.", SqlScriptExecutionEntry."Sql Script No.");
-        SqlScript.SetRange("Hash Code (SHA256)", SqlScriptExecutionEntry."Hash Code (SHA256)");
-        if SqlScript.FindSet() then begin
-            SqlScript.ViewScript();
+        SQLScript.SetRange("No.", SQLScriptExecutionEntry."SQL Script No.");
+        SQLScript.SetRange("Hash Code (SHA256)", SQLScriptExecutionEntry."Hash Code (SHA256)");
+        if SQLScript.FindSet() then begin
+            SQLScript.ViewScript();
             exit;
         end;
 
-        SqlScriptArchive.SetRange("Sql Script No.", SqlScriptExecutionEntry."Sql Script No.");
-        SqlScriptArchive.SetRange("Hash Code (SHA256)", SqlScriptExecutionEntry."Hash Code (SHA256)");
-        if SqlScriptArchive.FindSet() then begin
-            SqlScriptArchive.ViewScript();
+        SQLScriptArchive.SetRange("SQL Script No.", SQLScriptExecutionEntry."SQL Script No.");
+        SQLScriptArchive.SetRange("Hash Code (SHA256)", SQLScriptExecutionEntry."Hash Code (SHA256)");
+        if SQLScriptArchive.FindSet() then begin
+            SQLScriptArchive.ViewScript();
             exit;
         end;
     end;

@@ -1,19 +1,19 @@
-page 50100 "jdi Sql Connection List"
+page 50100 "jdi SQL Connection List"
 {
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
-    SourceTable = "jdi Sql Connection";
-    CardPageId = "jdi Sql Connection Card";
+    SourceTable = "jdi SQL Connection";
+    CardPageId = "jdi SQL Connection Card";
     Editable = false;
 
-    Caption = 'Sql Connections';
+    Caption = 'SQL Connections';
 
     layout
     {
         area(Content)
         {
-            repeater(SqlConnectionRepeater)
+            repeater(SQLConnectionRepeater)
             {
                 field("No."; Rec."No.")
                 {
@@ -73,8 +73,8 @@ page 50100 "jdi Sql Connection List"
 
                 trigger OnAction()
                 var
-                    ConnectionErr: Label 'Connection to Sql Database failed.';
-                    ConnectionSuccessMsg: Label 'Connection to Sql Database established.';
+                    ConnectionErr: Label 'Connection to SQL Database failed.';
+                    ConnectionSuccessMsg: Label 'Connection to SQL Database established.';
                 begin
                     if Rec.TestConnection() then
                         Message(ConnectionSuccessMsg)

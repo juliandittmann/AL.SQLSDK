@@ -1,9 +1,9 @@
-page 50102 "jdi Sql Connection String"
+page 50102 "jdi SQL Connection String"
 {
     PageType = StandardDialog;
     UsageCategory = None;
 
-    Caption = 'Sql Connection String Input';
+    Caption = 'SQL Connection String Input';
 
     layout
     {

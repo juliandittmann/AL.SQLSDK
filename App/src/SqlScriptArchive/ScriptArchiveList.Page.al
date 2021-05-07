@@ -1,8 +1,8 @@
-page 50110 "jdi Sql Script Archive List"
+page 50110 "jdi SQL Script Archive List"
 {
     PageType = List;
-    SourceTable = "jdi Sql Script Archive";
-    Caption = 'Sql Script Archive List';
+    SourceTable = "jdi SQL Script Archive";
+    Caption = 'SQL Script Archive List';
     ApplicationArea = All;
     UsageCategory = Lists;
 
@@ -12,7 +12,7 @@ page 50110 "jdi Sql Script Archive List"
         {
             repeater(General)
             {
-                field("Sql Script No."; Rec."Sql Script No.")
+                field("SQL Script No."; Rec."SQL Script No.")
                 {
                     ApplicationArea = All;
                 }

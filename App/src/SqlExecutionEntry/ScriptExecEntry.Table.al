@@ -1,4 +1,4 @@
-table 50106 "jdi Sql Script Exec Entry"
+table 50106 "jdi SQL Script Exec Entry"
 {
     DataClassification = SystemMetadata;
 
@@ -11,20 +11,20 @@ table 50106 "jdi Sql Script Exec Entry"
             Editable = false;
         }
 
-        field(2; "Sql Connection No."; Code[20])
+        field(2; "SQL Connection No."; Code[20])
         {
-            Caption = 'Sql Connection No.';
+            Caption = 'SQL Connection No.';
             DataClassification = CustomerContent;
-            TableRelation = "jdi Sql Connection";
+            TableRelation = "jdi SQL Connection";
             NotBlank = true;
             Editable = false;
         }
 
-        field(3; "Sql Script No."; Code[20])
+        field(3; "SQL Script No."; Code[20])
         {
-            Caption = 'Sql Script No,';
+            Caption = 'SQL Script No,';
             DataClassification = CustomerContent;
-            TableRelation = "jdi Sql Script"."No.";
+            TableRelation = "jdi SQL Script"."No.";
             NotBlank = true;
             Editable = false;
         }
@@ -68,7 +68,7 @@ table 50106 "jdi Sql Script Exec Entry"
             Caption = 'Executed with Parameter';
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = exist("jdi Sql Script ExecParam Entry" where("Execution Entry No." = field("Entry No.")));
+            CalcFormula = exist("jdi SQL Script ExecParam Entry" where("Execution Entry No." = field("Entry No.")));
         }
     }
 

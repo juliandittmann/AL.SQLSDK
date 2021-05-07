@@ -1,13 +1,13 @@
-table 50103 "jdi Sql Parameter"
+table 50103 "jdi SQL Parameter"
 {
     DataClassification = CustomerContent;
 
     fields
     {
-        field(1; "Sql Script No."; Code[20])
+        field(1; "SQL Script No."; Code[20])
         {
             DataClassification = CustomerContent;
-            TableRelation = "jdi Sql Script"."No.";
+            TableRelation = "jdi SQL Script"."No.";
         }
         field(2; Name; Text[250])
         {
@@ -21,7 +21,7 @@ table 50103 "jdi Sql Parameter"
 
     keys
     {
-        key(PrimaryKey; "Sql Script No.", Name)
+        key(PrimaryKey; "SQL Script No.", Name)
         {
             Clustered = true;
         }

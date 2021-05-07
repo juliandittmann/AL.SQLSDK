@@ -1,4 +1,4 @@
-table 50100 "jdi Sql Connection"
+table 50100 "jdi SQL Connection"
 {
     DataClassification = CustomerContent;
 

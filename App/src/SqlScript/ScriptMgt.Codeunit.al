@@ -1,4 +1,4 @@
-codeunit 50107 "jdi Sql Script Mgt"
+codeunit 50107 "jdi SQL Script Mgt"
 {
     trigger OnRun()
     begin

@@ -1,4 +1,4 @@
-controladdin "jdi Sql Editor"
+controladdin "jdi SQL Editor"
 {
     VerticalStretch = true;
     VerticalShrink = true;

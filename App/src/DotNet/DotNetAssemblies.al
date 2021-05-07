@@ -1,7 +1,5 @@
-
 dotnet
 {
-
     assembly(System.Data)
     {
         type(System.Data.SqlDbType; SqlDbType) { }

@@ -1,10 +1,10 @@
-page 50105 "jdi Sql Script Editor"
+page 50105 "jdi SQL Script Editor"
 {
     PageType = Card;
     UsageCategory = None;
-    SourceTable = "jdi Sql Script";
+    SourceTable = "jdi SQL Script";
 
-    Caption = 'Sql Script Editor';
+    Caption = 'SQL Script Editor';
 
     DeleteAllowed = false;
     InsertAllowed = false;
@@ -17,13 +17,13 @@ page 50105 "jdi Sql Script Editor"
             group(Control)
             {
                 ShowCaption = false;
-                usercontrol("Sql Editor"; "jdi Sql Editor")
+                usercontrol("SQL Editor"; "jdi SQL Editor")
                 {
                     ApplicationArea = all;
 
                     trigger ControlAddinLoaded()
                     begin
-                        CurrPage."Sql Editor".CreateControl();
+                        CurrPage."SQL Editor".CreateControl();
                     end;
 
                     trigger GetCode()
@@ -60,7 +60,7 @@ page 50105 "jdi Sql Script Editor"
 
                 trigger OnAction()
                 begin
-                    CurrPage."Sql Editor".GetModifedCode();
+                    CurrPage."SQL Editor".GetModifedCode();
                 end;
             }
         }
@@ -68,10 +68,10 @@ page 50105 "jdi Sql Script Editor"
 
     local procedure SetCode(): Text
     var
-        SqlScript: Text;
+        SQLScript: Text;
     begin
-        if Rec.GetScript(SqlScript) then
-            CurrPage."Sql Editor".SetCode(SqlScript);
+        if Rec.GetScript(SQLScript) then
+            CurrPage."SQL Editor".SetCode(SQLScript);
     end;
 
     procedure SetHideSaveButton(pHideSaveButton: Boolean)

@@ -1,7 +1,7 @@
-table 50102 "jdi Sql Script"
+table 50102 "jdi SQL Script"
 {
     DataClassification = CustomerContent;
-    LookupPageId = "jdi Sql Script List";
+    LookupPageId = "jdi SQL Script List";
     fields
     {
 
@@ -18,9 +18,9 @@ table 50102 "jdi Sql Script"
             DataClassification = CustomerContent;
         }
 
-        field(3; "Script Type"; Enum "jdi Sql Script Type")
+        field(3; "Script Type"; Enum "jdi SQL Script Type")
         {
-            Caption = 'Sql Script Type';
+            Caption = 'SQL Script Type';
             DataClassification = CustomerContent;
         }
 
@@ -30,7 +30,7 @@ table 50102 "jdi Sql Script"
             DataClassification = CustomerContent;
         }
 
-        field(5; "File Type"; Enum "jdi Sql File Type")
+        field(5; "File Type"; Enum "jdi SQL File Type")
         {
             Caption = 'File Type';
             Editable = false;
@@ -60,7 +60,7 @@ table 50102 "jdi Sql Script"
                         "File Type" := "File Type"::Email;
                     'xml':
                         "File Type" := "File Type"::XML;
-                    'sql':
+                    'SQL':
                         "File Type" := "File Type"::SQL;
                     else
                         "File Type" := "File Type"::Other;
@@ -133,21 +133,21 @@ table 50102 "jdi Sql Script"
         Rec.Validate("Last Change Date", CurrentDateTime());
         Rec."Changed by" := UserSecurityId();
 
-        CreateSqlParameter();
+        CreateSQLParameter();
     end;
 
     trigger OnModify()
     var
-        ConfirmQst: Label 'Do you want to overwrite SqlParameter?';
+        ConfirmQst: Label 'Do you want to overwrite SQLParameter?';
     begin
-        if SqlParameterExist() then
+        if SQLParameterExist() then
             if Confirm(ConfirmQst) then
-                ReCreateSqlParameter();
+                ReCreateSQLParameter();
     end;
 
     trigger OnDelete()
     begin
-        DeleteSqlParameter();
+        DeleteSQLParameter();
     end;
 
     local procedure CreateSha256Hash(TempBlob: Codeunit "Temp Blob"): Text[64]
@@ -209,7 +209,7 @@ table 50102 "jdi Sql Script"
     end;
 
     [TryFunction]
-    procedure GetScript(var SqlScript: Text)
+    procedure GetScript(var SQLScript: Text)
     var
         TempBlob: Codeunit "Temp Blob";
         DocumentOutStream: OutStream;
@@ -218,7 +218,7 @@ table 50102 "jdi Sql Script"
         StreamReader: DotNet StreamReader;
         Encoding: DotNet Encoding;
     begin
-        Clear(SqlScript);
+        Clear(SQLScript);
 
         // Ensure document has value in DB
         if not Rec.File.HasValue() then
@@ -229,55 +229,55 @@ table 50102 "jdi Sql Script"
         TempBlob.CreateInStream(DocumentInStream, TextEncoding::UTF8);
 
         StreamReader := StreamReader.StreamReader(DocumentInStream, Encoding.UTF8, true);
-        SqlScript := StreamReader.ReadToEnd();
+        SQLScript := StreamReader.ReadToEnd();
     end;
 
     procedure Execute()
     var
-        SqlScriptMapping: Record "jdi Sql Script Mapping";
-        SqlConnection: Record "jdi Sql Connection";
-        SqlConnectionList: Page "jdi Sql Connection List";
+        SQLScriptMapping: Record "jdi SQL Script Mapping";
+        SQLConnection: Record "jdi SQL Connection";
+        SQLConnectionList: Page "jdi SQL Connection List";
     begin
-        SqlConnectionList.LookupMode(true);
-        if (SqlConnectionList.RunModal() = Action::LookupOK) then begin
-            SqlConnectionList.GetRecord(SqlConnection);
+        SQLConnectionList.LookupMode(true);
+        if (SQLConnectionList.RunModal() = Action::LookupOK) then begin
+            SQLConnectionList.GetRecord(SQLConnection);
 
-            if SqlScriptMapping.Get(SqlConnection."No.", Rec."No.") then
-                SqlScriptMapping.Execute()
+            if SQLScriptMapping.Get(SQLConnection."No.", Rec."No.") then
+                SQLScriptMapping.Execute()
             else
-                CreateAndExecuteSqlScriptMapping(SqlConnection);
+                CreateAndExecuteSQLScriptMapping(SQLConnection);
         end;
     end;
 
 
-    procedure Execute(SqlConnection: Record "jdi Sql Connection")
+    procedure Execute(SQLConnection: Record "jdi SQL Connection")
     var
-        SqlScriptMapping: Record "jdi Sql Script Mapping";
+        SQLScriptMapping: Record "jdi SQL Script Mapping";
     begin
-        if SqlScriptMapping.Get(SqlConnection."No.", Rec."No.") then
-            SqlScriptMapping.Execute()
+        if SQLScriptMapping.Get(SQLConnection."No.", Rec."No.") then
+            SQLScriptMapping.Execute()
         else
-            CreateAndExecuteSqlScriptMapping(SqlConnection);
+            CreateAndExecuteSQLScriptMapping(SQLConnection);
     end;
 
     procedure ViewScript()
     var
-        SqlScriptEditor: Page "jdi Sql Script Editor";
+        SQLScriptEditor: Page "jdi SQL Script Editor";
     begin
-        Clear(SqlScriptEditor);
-        SqlScriptEditor.SetHideSaveButton(true);
-        SqlScriptEditor.SetRecord(Rec);
-        SqlScriptEditor.Run();
+        Clear(SQLScriptEditor);
+        SQLScriptEditor.SetHideSaveButton(true);
+        SQLScriptEditor.SetRecord(Rec);
+        SQLScriptEditor.Run();
     end;
 
 
     procedure EditScript()
     var
-        SqlScriptEditor: Page "jdi Sql Script Editor";
+        SQLScriptEditor: Page "jdi SQL Script Editor";
     begin
-        Clear(SqlScriptEditor);
-        SqlScriptEditor.SetRecord(Rec);
-        SqlScriptEditor.Run();
+        Clear(SQLScriptEditor);
+        SQLScriptEditor.SetRecord(Rec);
+        SQLScriptEditor.Run();
     end;
 
     procedure SaveScript(NewCode: Text);
@@ -303,52 +303,52 @@ table 50102 "jdi Sql Script"
         end;
     end;
 
-    procedure DeleteSqlParameter()
+    procedure DeleteSQLParameter()
     var
-        SqlParameter: Record "jdi Sql Parameter";
+        SQLParameter: Record "jdi SQL Parameter";
     begin
-        SqlParameter.SetRange("Sql Script No.", Rec."No.");
-        if SqlParameter.FindSet() then
-            SqlParameter.DeleteAll(true);
+        SQLParameter.SetRange("SQL Script No.", Rec."No.");
+        if SQLParameter.FindSet() then
+            SQLParameter.DeleteAll(true);
     end;
 
-    procedure CreateSqlParameter()
+    procedure CreateSQLParameter()
     var
-        SqlParameterMgt: Codeunit "jdi Sql Parameter Mgt";
+        SQLParameterMgt: Codeunit "jdi SQL Parameter Mgt";
     begin
-        SqlParameterMgt.CreateSqlParameter(Rec);
+        SQLParameterMgt.CreateSQLParameter(Rec);
     end;
 
-    procedure ReCreateSqlParameter()
+    procedure ReCreateSQLParameter()
     begin
-        DeleteSqlParameter();
-        CreateSqlParameter();
+        DeleteSQLParameter();
+        CreateSQLParameter();
     end;
 
-    procedure SqlParameterExist(): Boolean;
+    procedure SQLParameterExist(): Boolean;
     var
-        SqlParameter: Record "jdi Sql Parameter";
+        SQLParameter: Record "jdi SQL Parameter";
     begin
-        SqlParameter.SetRange("Sql Script No.", Rec."No.");
-        exit(not SqlParameter.IsEmpty());
+        SQLParameter.SetRange("SQL Script No.", Rec."No.");
+        exit(not SQLParameter.IsEmpty());
     end;
 
-    procedure GetSqlParameter() SqlParameter: Record "jdi Sql Parameter"
+    procedure GetSQLParameter() SQLParameter: Record "jdi SQL Parameter"
     begin
-        SqlParameter.SetRange("Sql Script No.", Rec."No.");
+        SQLParameter.SetRange("SQL Script No.", Rec."No.");
     end;
 
-    local procedure CreateAndExecuteSqlScriptMapping(SqlConnection: Record "jdi Sql Connection")
+    local procedure CreateAndExecuteSQLScriptMapping(SQLConnection: Record "jdi SQL Connection")
     begin
-        CreateSqlScriptMapping(SqlConnection).Execute();
+        CreateSQLScriptMapping(SQLConnection).Execute();
     end;
 
-    local procedure CreateSqlScriptMapping(SqlConnection: Record "jdi Sql Connection") SqlScriptMapping: Record "jdi Sql Script Mapping"
+    local procedure CreateSQLScriptMapping(SQLConnection: Record "jdi SQL Connection") SQLScriptMapping: Record "jdi SQL Script Mapping"
     begin
-        SqlScriptMapping.Init();
-        SqlScriptMapping."Sql Connection No." := SqlConnection."No.";
-        SqlScriptMapping."Sql Script No." := Rec."No.";
-        SqlScriptMapping.Insert(true);
+        SQLScriptMapping.Init();
+        SQLScriptMapping."SQL Connection No." := SQLConnection."No.";
+        SQLScriptMapping."SQL Script No." := Rec."No.";
+        SQLScriptMapping.Insert(true);
     end;
 
     var

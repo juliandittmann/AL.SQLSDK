@@ -1,8 +1,8 @@
-page 50108 "jdi Sql Script ExecP EntryList"
+page 50108 "jdi SQL Script ExecP EntryList"
 {
     PageType = List;
-    SourceTable = "jdi Sql Script ExecParam Entry";
-    Caption = 'Sql Script Execution Parameter Entry List';
+    SourceTable = "jdi SQL Script ExecParam Entry";
+    Caption = 'SQL Script Execution Parameter Entry List';
     UsageCategory = None;
 
     InsertAllowed = false;

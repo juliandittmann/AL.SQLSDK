@@ -1,4 +1,4 @@
-table 50107 "jdi Sql Script ExecParam Entry"
+table 50107 "jdi SQL Script ExecParam Entry"
 {
     DataClassification = SystemMetadata;
 
@@ -39,12 +39,12 @@ table 50107 "jdi Sql Script ExecParam Entry"
 
     procedure GetNextEntryNo() NextEntryNo: Integer
     var
-        SqlScriptExecParameterEntry: Record "jdi Sql Script ExecParam Entry";
+        SQLScriptExecParameterEntry: Record "jdi SQL Script ExecParam Entry";
     begin
         TestField("Execution Entry No.");
-        SqlScriptExecParameterEntry.SetRange("Execution Entry No.", Rec."Execution Entry No.");
-        if SqlScriptExecParameterEntry.FindLast() then
-            NextEntryNo := SqlScriptExecParameterEntry."Entry No." + 1
+        SQLScriptExecParameterEntry.SetRange("Execution Entry No.", Rec."Execution Entry No.");
+        if SQLScriptExecParameterEntry.FindLast() then
+            NextEntryNo := SQLScriptExecParameterEntry."Entry No." + 1
         else
             NextEntryNo := 1;
     end;

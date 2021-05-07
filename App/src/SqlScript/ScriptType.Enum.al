@@ -1,4 +1,4 @@
-enum 50102 "jdi Sql Script Type"
+enum 50102 "jdi SQL Script Type"
 {
     Extensible = true;
 

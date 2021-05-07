@@ -1,6 +1,6 @@
 {
   "id": "f57e9f77-083c-477e-8d75-442c3cf41942",
-  "name": "SQL API",
+  "name": "SQL SDK",
   "publisher": "Julian Dittmann",
   "version": "18.0.0.0",
   "brief": "",
@@ -8,7 +8,7 @@
   "privacyStatement": "",
   "EULA": "",
   "help": "",
-  "url": "https://github.com/juliandittmann/AL.SqlAPI",
+  "url": "https://github.com/juliandittmann/AL.SQLSDK",
   "logo": "",
   "dependencies": [
   ],

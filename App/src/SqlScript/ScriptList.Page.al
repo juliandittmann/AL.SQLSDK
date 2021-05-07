@@ -1,9 +1,9 @@
-page 50104 "jdi Sql Script List"
+page 50104 "jdi SQL Script List"
 {
     PageType = List;
     ApplicationArea = all;
-    SourceTable = "jdi Sql Script";
-    Caption = 'Sql Scripts';
+    SourceTable = "jdi SQL Script";
+    Caption = 'SQL Scripts';
 
     UsageCategory = Lists;
     DelayedInsert = true;
@@ -151,51 +151,51 @@ page 50104 "jdi Sql Script List"
                 Caption = 'Parameter';
                 Image = AboutNav;
 
-                action(ShowSqlParameter)
+                action(ShowSQLParameter)
                 {
-                    Caption = 'Show SqlParameter';
-                    ToolTip = 'Deletes existing SqlParameter and creates new SqlParameter';
+                    Caption = 'Show SQLParameter';
+                    ToolTip = 'Deletes existing SQLParameter and creates new SQLParameter';
                     ApplicationArea = all;
                     Scope = Page;
                     Image = EditList;
 
                     trigger OnAction()
                     var
-                        SqlParameter: Record "jdi Sql Parameter";
-                        SqlParameterList: Page "jdi Sql Parameter List";
+                        SQLParameter: Record "jdi SQL Parameter";
+                        SQLParameterList: Page "jdi SQL Parameter List";
                     begin
-                        SqlParameter.SetRange("Sql Script No.", Rec."No.");
-                        if SqlParameter.FindSet() then;
-                        SqlParameterList.SetTableView(SqlParameter);
-                        SqlParameterList.RunModal();
+                        SQLParameter.SetRange("SQL Script No.", Rec."No.");
+                        if SQLParameter.FindSet() then;
+                        SQLParameterList.SetTableView(SQLParameter);
+                        SQLParameterList.RunModal();
                     end;
                 }
 
-                action(ReCreateSqlParameter)
+                action(ReCreateSQLParameter)
                 {
-                    Caption = 'Recreate SqlParameter';
-                    ToolTip = 'Deletes existing SqlParameter and creates new SqlParameter';
+                    Caption = 'Recreate SQLParameter';
+                    ToolTip = 'Deletes existing SQLParameter and creates new SQLParameter';
                     ApplicationArea = all;
                     Scope = Page;
                     Image = CreateDocument;
 
                     trigger OnAction()
                     begin
-                        Rec.CreateSqlParameter();
+                        Rec.CreateSQLParameter();
                     end;
                 }
 
-                action(DeleteSqlParementer)
+                action(DeleteSQLParementer)
                 {
-                    Caption = 'Delete SqlParameter';
-                    ToolTip = 'Deletes existing SqlParameter.';
+                    Caption = 'Delete SQLParameter';
+                    ToolTip = 'Deletes existing SQLParameter.';
                     ApplicationArea = all;
                     Scope = Page;
                     Image = Delete;
 
                     trigger OnAction()
                     begin
-                        Rec.DeleteSqlParameter();
+                        Rec.DeleteSQLParameter();
                     end;
                 }
             }
@@ -210,7 +210,7 @@ page 50104 "jdi Sql Script List"
     var
         FileManagement: Codeunit "File Management";
         ImportTxt: Label 'Attach a document.', comment = 'Add a file';
-        FilterTxt: Label '*.sql', Locked = true;
+        FilterTxt: Label '*.SQL', Locked = true;
         FileDialogTxt: Label 'Attachments (%1)|%1', Comment = 'Add     " (%1)|%1"     to the phrase. This is important!';
         SelectFileTxt: Label 'Select File...', Comment = 'With dots please';
 

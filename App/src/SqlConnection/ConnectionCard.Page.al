@@ -1,10 +1,10 @@
-page 50101 "jdi Sql Connection Card"
+page 50101 "jdi SQL Connection Card"
 {
     PageType = Card;
     UsageCategory = None;
-    SourceTable = "jdi Sql Connection";
+    SourceTable = "jdi SQL Connection";
 
-    Caption = 'Sql Connection';
+    Caption = 'SQL Connection';
 
     layout
     {
@@ -37,9 +37,9 @@ page 50101 "jdi Sql Connection Card"
             {
                 Caption = 'Connection';
 
-                group(SqlServer)
+                group(SQLServer)
                 {
-                    Caption = 'Sql Server';
+                    Caption = 'SQL Server';
 
                     field(Authentication; Rec.Authentication)
                     {
@@ -113,8 +113,8 @@ page 50101 "jdi Sql Connection Card"
 
                 trigger OnAction()
                 var
-                    ConnectionErr: Label 'Connection to Sql Database failed.';
-                    ConnectionSuccessMsg: Label 'Connection to Sql Database established.';
+                    ConnectionErr: Label 'Connection to SQL Database failed.';
+                    ConnectionSuccessMsg: Label 'Connection to SQL Database established.';
                 begin
                     if Rec.TestConnection() then
                         Message(ConnectionSuccessMsg)
@@ -136,11 +136,11 @@ page 50101 "jdi Sql Connection Card"
 
                 trigger OnAction()
                 var
-                    SqlConnectionStringInput: Page "jdi Sql Connection String";
+                    SQLConnectionStringInput: Page "jdi SQL Connection String";
                 begin
-                    SqlConnectionStringInput.LookupMode := true;
-                    if SqlConnectionStringInput.RunModal() = Action::LookupOK then
-                        Rec.ImportConnectionString(SqlConnectionStringInput.GetConnectionString());
+                    SQLConnectionStringInput.LookupMode := true;
+                    if SQLConnectionStringInput.RunModal() = Action::LookupOK then
+                        Rec.ImportConnectionString(SQLConnectionStringInput.GetConnectionString());
 
                     AuthenticationOnAfterValidate();
                 end;
@@ -158,16 +158,16 @@ page 50101 "jdi Sql Connection Card"
     trigger OnOpenPage()
     begin
         Password := '***';
-        DatabaseUserEditable := Rec.Authentication = Rec.Authentication::"Sql Server Authentication";
-        PasswordEditable := Rec.Authentication = Rec.Authentication::"Sql Server Authentication";
+        DatabaseUserEditable := Rec.Authentication = Rec.Authentication::"SQL Server Authentication";
+        PasswordEditable := Rec.Authentication = Rec.Authentication::"SQL Server Authentication";
     end;
 
 
 
     local procedure AuthenticationOnAfterValidate()
     begin
-        DatabaseUserEditable := Rec.Authentication = Rec.Authentication::"Sql Server Authentication";
-        PasswordEditable := Rec.Authentication = Rec.Authentication::"Sql Server Authentication";
+        DatabaseUserEditable := Rec.Authentication = Rec.Authentication::"SQL Server Authentication";
+        PasswordEditable := Rec.Authentication = Rec.Authentication::"SQL Server Authentication";
     end;
 
 

@@ -1,8 +1,8 @@
-page 50106 "jdi Sql Parameter List"
+page 50106 "jdi SQL Parameter List"
 {
     PageType = List;
     UsageCategory = None;
-    SourceTable = "jdi Sql Parameter";
+    SourceTable = "jdi SQL Parameter";
 
     layout
     {

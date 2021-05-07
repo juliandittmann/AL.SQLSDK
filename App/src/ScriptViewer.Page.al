@@ -1,10 +1,10 @@
-page 50111 "jdi Sql Script Viewer"
+page 50111 "jdi SQL Script Viewer"
 {
     PageType = Card;
     UsageCategory = None;
-    SourceTable = "jdi Sql Script Archive";
+    SourceTable = "jdi SQL Script Archive";
 
-    Caption = 'Sql Script Viewer';
+    Caption = 'SQL Script Viewer';
 
     DeleteAllowed = false;
     InsertAllowed = false;
@@ -17,13 +17,13 @@ page 50111 "jdi Sql Script Viewer"
             group(Control)
             {
                 ShowCaption = false;
-                usercontrol("Sql Editor"; "jdi Sql Editor")
+                usercontrol("SQL Editor"; "jdi SQL Editor")
                 {
                     ApplicationArea = all;
 
                     trigger ControlAddinLoaded()
                     begin
-                        CurrPage."Sql Editor".CreateControl();
+                        CurrPage."SQL Editor".CreateControl();
                     end;
 
                     trigger GetCode()
@@ -37,9 +37,9 @@ page 50111 "jdi Sql Script Viewer"
 
     local procedure SetCode(): Text
     var
-        SqlScript: Text;
+        SQLScript: Text;
     begin
-        if Rec.GetScript(SqlScript) then
-            CurrPage."Sql Editor".SetCode(SqlScript);
+        if Rec.GetScript(SQLScript) then
+            CurrPage."SQL Editor".SetCode(SQLScript);
     end;
 }
