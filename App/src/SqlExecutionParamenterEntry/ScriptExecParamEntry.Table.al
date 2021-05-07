@@ -6,7 +6,7 @@ table 50107 "jdi SQL Script ExecParam Entry"
     {
         field(1; "Execution Entry No."; Integer)
         {
-            DataClassification = ToBeClassified;
+            DataClassification = SystemMetadata;
             Editable = false;
         }
 

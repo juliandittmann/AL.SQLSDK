@@ -46,6 +46,7 @@ table 50106 "jdi SQL Script Exec Entry"
         field(10; "Last Execution Date"; DateTime)
         {
             Caption = 'Last Execution';
+            DataClassification = SystemMetadata;
             Editable = false;
         }
 
