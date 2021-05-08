@@ -3,6 +3,7 @@ page 50106 "jdi SQL Parameter List"
     PageType = List;
     UsageCategory = None;
     SourceTable = "jdi SQL Parameter";
+    Caption = 'SQL Parameter';
 
     layout
     {
