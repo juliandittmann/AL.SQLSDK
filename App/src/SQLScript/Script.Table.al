@@ -333,9 +333,15 @@ table 50102 "jdi SQL Script"
         exit(not SQLParameter.IsEmpty());
     end;
 
-    procedure GetSQLParameter() SQLParameter: Record "jdi SQL Parameter"
+    procedure GetSQLParameter() Parameter: Dictionary of [Text, Text];
+    var
+        SQLParameter: Record "jdi SQL Parameter";
     begin
         SQLParameter.SetRange("SQL Script No.", Rec."No.");
+        if SQLParameter.FindSet() then
+            repeat
+                Parameter.Add(SQLParameter.Name, SQLParameter.Value);
+            until SQLParameter.Next() = 0;
     end;
 
     local procedure CreateAndExecuteSQLScriptMapping(SQLConnection: Record "jdi SQL Connection")

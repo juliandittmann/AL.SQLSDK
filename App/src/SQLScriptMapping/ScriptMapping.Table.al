@@ -1,24 +1,24 @@
-table 50104 "jdi Sql Script Mapping"
+table 50104 "jdi SQL Script Mapping"
 {
     DataClassification = CustomerContent;
 
     fields
     {
-        field(1; "Sql Connection No."; Code[20])
+        field(1; "SQL Connection No."; Code[20])
         {
-            TableRelation = "jdi Sql Connection";
+            TableRelation = "jdi SQL Connection";
         }
 
-        field(2; "Sql Script No."; Code[20])
+        field(2; "SQL Script No."; Code[20])
         {
-            TableRelation = "jdi Sql Script";
+            TableRelation = "jdi SQL Script";
         }
 
         field(3; Description; Text[250])
         {
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = lookup("jdi Sql Script".Description where("No." = field("Sql Script No.")));
+            CalcFormula = lookup("jdi SQL Script".Description where("No." = field("SQL Script No.")));
         }
 
         field(10; "Last Execution Date"; DateTime)
@@ -44,13 +44,13 @@ table 50104 "jdi Sql Script Mapping"
         {
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = lookup("jdi Sql Script"."Last Change Date" where("No." = field("Sql Script No.")));
+            CalcFormula = lookup("jdi SQL Script"."Last Change Date" where("No." = field("SQL Script No.")));
         }
     }
 
     keys
     {
-        key(PirmaryKey; "Sql Connection No.", "Sql Script No.")
+        key(PirmaryKey; "SQL Connection No.", "SQL Script No.")
         {
             Clustered = true;
         }
@@ -58,21 +58,21 @@ table 50104 "jdi Sql Script Mapping"
 
     procedure Execute()
     var
-        SqlScript: Record "jdi Sql Script";
-        SqlParameter: Record "jdi Sql Parameter";
-        SqlScriptText: Text;
+        SQLScript: Record "jdi SQL Script";
+        SQLParameter: Dictionary of [Text, Text];
+        SQLScriptText: Text;
         ScalarResponse: Variant;
     begin
-        if SqlScript.Get(Rec."Sql Script No.") then
-            if SqlScript.GetScript(SqlScriptText) then begin
+        if SQLScript.Get(Rec."SQL Script No.") then
+            if SQLScript.GetScript(SQLScriptText) then begin
 
-                SqlParameter := SqlScript.GetSqlParameter();
-                case SqlScript."Script Type" of
-                    SqlScript."Script Type"::"Non Query":
-                        GetSqlConnection().ExecuteNonQuery(SqlScriptText, SqlParameter);
-                    SqlScript."Script Type"::Scalar:
+                SQLParameter := SQLScript.GetSQLParameter();
+                case SQLScript."Script Type" of
+                    SQLScript."Script Type"::"Non Query":
+                        GetSQLConnection().ExecuteNonQuery(SQLScriptText, SQLParameter);
+                    SQLScript."Script Type"::Scalar:
                         begin
-                            GetSqlConnection().ExecuteScalar(SqlScriptText, SqlParameter, ScalarResponse);
+                            GetSQLConnection().ExecuteScalar(SQLScriptText, SQLParameter, ScalarResponse);
                             Message(Format(ScalarResponse)); //TODO: Evtl. nicht via Message ausgeben
                         end;
                 end;
@@ -81,19 +81,19 @@ table 50104 "jdi Sql Script Mapping"
                 Rec."Executed by" := UserSecurityId();
                 Rec.Modify(false);
 
-                OnAfterSqlScriptExecution(Rec, SqlScript, SqlParameter)
+                OnAfterSQLScriptExecution(Rec, SQLScript, SQLParameter)
             end;
     end;
 
-    procedure GetSqlConnection() SqlConnection: Record "jdi Sql Connection";
+    procedure GetSQLConnection() SQLConnection: Record "jdi SQL Connection";
     begin
-        if SqlConnection.Get(Rec."Sql Connection No.") then
-            exit(SqlConnection);
+        if SQLConnection.Get(Rec."SQL Connection No.") then
+            exit(SQLConnection);
     end;
 
 
     [IntegrationEvent(true, false)]
-    local procedure OnAfterSqlScriptExecution(var SqlScriptMapping: Record "jdi Sql Script Mapping"; var SqlScript: Record "jdi Sql Script"; var SqlParameter: Record "jdi Sql Parameter")
+    local procedure OnAfterSQLScriptExecution(var SQLScriptMapping: Record "jdi SQL Script Mapping"; var SQLScript: Record "jdi SQL Script"; SQLParameter: Dictionary of [Text, Text])
     begin
     end;
 }
