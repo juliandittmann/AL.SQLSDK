@@ -82,7 +82,3 @@ jobs:
           name: Manifest
           path: output/manifest.json
           if-no-files-found: ignore
-
-      - name: Cleanup
-        if: always()
-        run: scripts\Cleanup.ps1
