@@ -4,7 +4,7 @@ codeunit 50102 "jdi SQL Management"
 
     var
         GlobalSQLConnection: Record "jdi SQL Connection";
-        TempGlobalSQLParameter: Record "jdi SQL Parameter" temporary;
+        GlobalSQLParameter: Dictionary of [Text, Text];
 
     trigger OnRun()
     begin
@@ -17,9 +17,9 @@ codeunit 50102 "jdi SQL Management"
         GlobalSQLConnection := pSQLConnection;
     end;
 
-    procedure SetSQLParameter(var pSQLParameter: Record "jdi SQL Parameter" temporary)
+    procedure SetSQLParameter(SQLParameter: Dictionary of [Text, Text])
     begin
-        TempGlobalSQLParameter := pSQLParameter;
+        GlobalSQLParameter := SQLParameter;
     end;
 
     [TryFunction]
@@ -48,26 +48,24 @@ codeunit 50102 "jdi SQL Management"
     [TryFunction]
     procedure TryExecuteNonQuery(SQLStatement: Text)
     begin
-        ExecuteNonQuery(GlobalSQLConnection, SQLStatement);
+        ExecuteNonQuery(GlobalSQLConnection, SQLStatement, GlobalSQLParameter);
     end;
 
 
     [TryFunction]
     procedure TryExecuteNonQuery(pSQLConnection: Record "jdi SQL Connection"; SQLStatement: Text)
     begin
-        ExecuteNonQuery(pSQLConnection, SQLStatement);
+        ExecuteNonQuery(pSQLConnection, SQLStatement, GlobalSQLParameter);
     end;
 
     procedure ExecuteNonQuery(SQLStatement: Text)
     begin
-        ExecuteNonQuery(GlobalSQLConnection, SQLStatement);
+        ExecuteNonQuery(GlobalSQLConnection, SQLStatement, GlobalSQLParameter);
     end;
 
     procedure ExecuteNonQuery(pSQLConnection: Record "jdi SQL Connection"; SQLStatement: Text)
-    var
-        SQLParameter: Dictionary of [Text, Text];
     begin
-        ExecuteNonQuery(pSQLConnection, SQLStatement, SQLParameter);
+        ExecuteNonQuery(pSQLConnection, SQLStatement, GlobalSQLParameter);
     end;
 
     procedure ExecuteNonQuery(pSQLConnection: Record "jdi SQL Connection"; SQLStatement: Text; SQLParameter: Dictionary of [Text, Text])
@@ -207,14 +205,14 @@ codeunit 50102 "jdi SQL Management"
         ExecuteScalar(SQLStatement, SQLParameter, ResponseText);
     end;
 
-    //Try - Decimal - With GlobalSQLConnection + Parameter
+    //Try - Decimal - With GlobalSQLConnection + GlobalSQLParameter
     [TryFunction]
     procedure TryExecuteScalar(SQLStatement: Text; SQLParameter: Dictionary of [Text, Text]; var ResponseDecimal: Decimal)
     begin
         ExecuteScalar(SQLStatement, SQLParameter, ResponseDecimal);
     end;
 
-    //Try - Variant - With GlobalSQLConnection + Parameter
+    //Try - Variant - With GlobalSQLConnection + GlobalSQLParameter
     [TryFunction]
     procedure TryExecuteScalar(SQLStatement: Text; SQLParameter: Dictionary of [Text, Text]; var ResponseVariant: Variant)
     begin
@@ -231,10 +229,9 @@ codeunit 50102 "jdi SQL Management"
     //Text - SQLConnection
     procedure ExecuteScalar(pSQLConnection: Record "jdi SQL Connection"; SQLStatement: Text; var ResponseText: Text)
     var
-        SQLParameter: Dictionary of [Text, Text];
         ResponseVariant: Variant;
     begin
-        ExecuteScalar(pSQLConnection, SQLStatement, SQLParameter, ResponseVariant);
+        ExecuteScalar(pSQLConnection, SQLStatement, GlobalSQLParameter, ResponseVariant);
         if ResponseVariant.IsText() then
             ResponseText := ResponseVariant
         else
@@ -246,10 +243,9 @@ codeunit 50102 "jdi SQL Management"
     //Decimal - SQLConnection
     procedure ExecuteScalar(pSQLConnection: Record "jdi SQL Connection"; SQLStatement: Text; var ResponseDecimal: Decimal)
     var
-        SQLParameter: Dictionary of [Text, Text];
         ResponseVariant: Variant;
     begin
-        ExecuteScalar(pSQLConnection, SQLStatement, SQLParameter, ResponseVariant);
+        ExecuteScalar(pSQLConnection, SQLStatement, GlobalSQLParameter, ResponseVariant);
         if ResponseVariant.IsDecimal then
             ResponseDecimal := ResponseVariant
         else
@@ -259,10 +255,8 @@ codeunit 50102 "jdi SQL Management"
 
     //Variant - SQLConnection
     procedure ExecuteScalar(pSQLConnection: Record "jdi SQL Connection"; SQLStatement: Text; var ResponseVariant: Variant)
-    var
-        SQLParameter: Dictionary of [Text, Text];
     begin
-        ExecuteScalar(pSQLConnection, SQLStatement, SQLParameter, ResponseVariant);
+        ExecuteScalar(pSQLConnection, SQLStatement, GlobalSQLParameter, ResponseVariant);
     end;
 
 
@@ -270,28 +264,22 @@ codeunit 50102 "jdi SQL Management"
     //Try - Text - SQLConnection
     [TryFunction]
     procedure TryExecuteScalar(pSQLConnection: Record "jdi SQL Connection"; SQLStatement: Text; var ResponseText: Text)
-    var
-        SQLParameter: Dictionary of [Text, Text];
     begin
-        ExecuteScalar(pSQLConnection, SQLStatement, SQLParameter, ResponseText);
+        ExecuteScalar(pSQLConnection, SQLStatement, GlobalSQLParameter, ResponseText);
     end;
 
     //Try - Decimal - SQLConnection
     [TryFunction]
     procedure TryExecuteScalar(pSQLConnection: Record "jdi SQL Connection"; SQLStatement: Text; var ResponseDecimal: Decimal)
-    var
-        SQLParameter: Dictionary of [Text, Text];
     begin
-        ExecuteScalar(pSQLConnection, SQLStatement, SQLParameter, ResponseDecimal);
+        ExecuteScalar(pSQLConnection, SQLStatement, GlobalSQLParameter, ResponseDecimal);
     end;
 
     //Try - Variant - SQLConnection
     [TryFunction]
     procedure TryExecuteScalar(pSQLConnection: Record "jdi SQL Connection"; SQLStatement: Text; var ResponseVariant: Variant)
-    var
-        SQLParameter: Dictionary of [Text, Text];
     begin
-        ExecuteScalar(pSQLConnection, SQLStatement, SQLParameter, ResponseVariant);
+        ExecuteScalar(pSQLConnection, SQLStatement, GlobalSQLParameter, ResponseVariant);
     end;
 
 
