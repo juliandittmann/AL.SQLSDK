@@ -28,7 +28,7 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - uses: Azure/get-keyvault-secrets@v1.0
+      - uses: Azure/get-keyvault-secrets@v1.2
         with:
           keyvault: "juliandittmann"
           secrets: 'CodeSignCertPfxFile, InsiderSasToken, LicenseFile'
